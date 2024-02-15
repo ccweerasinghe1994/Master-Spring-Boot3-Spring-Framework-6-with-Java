@@ -13,6 +13,8 @@ public class App02SpringFramwork {
         System.out.println(context.getBean("address"));
         System.out.println(context.getBean("person1"));
         System.out.println(context.getBean("yourCustomBeanName"));
+        System.out.println(context.getBean("person3MethodCall"));
+        System.out.println(context.getBean("person4MethodCall"));
     }
 
 }
