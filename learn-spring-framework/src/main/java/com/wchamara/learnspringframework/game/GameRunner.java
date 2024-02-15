@@ -1,4 +1,4 @@
-package com.wchamara.learnspringframework;
+package com.wchamara.learnspringframework.game;
 
 public class GameRunner {
 
