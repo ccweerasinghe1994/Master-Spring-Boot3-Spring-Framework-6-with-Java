@@ -17,12 +17,12 @@ record Address(String firtLine, String secondLine, String city, String country, 
 public class HelloWorldConfiguration {
     @Bean
     public String name() {
-        return "Chamara";
+        return "Chamara11111111111";
     }
 
     @Bean
-    public String age() {
-        return "30";
+    public int age() {
+        return 30;
     }
 
     @Bean
@@ -38,6 +38,16 @@ public class HelloWorldConfiguration {
     @Bean("yourCustomBeanName")
     public Person person2() {
         return new Person("Chamara", 31);
+    }
+
+    @Bean
+    public Person person3MethodCall() {
+        return new Person(name(), age());
+    }
+
+    @Bean
+    public Person person4MethodCall(String name, int age) {
+        return new Person(name, age);
     }
 
 }
