@@ -19,6 +19,12 @@ go to [start.spring.io](https://start.spring.io/)
 
 ## 005 Step 04 - Getting Started with Java Gaming Application
 
+![alt text](image-17.png)
+![alt text](image-18.png)
+![alt text](image-20.png)
+![alt text](image-21.png)
+![alt text](image-22.png)
+
 ## 006 Step 05 - Understanding Loose Coupling and Tight Coupling
 
 ## 007 Step 06 - Introducing Java Interface to Make App Loosely Coupled
