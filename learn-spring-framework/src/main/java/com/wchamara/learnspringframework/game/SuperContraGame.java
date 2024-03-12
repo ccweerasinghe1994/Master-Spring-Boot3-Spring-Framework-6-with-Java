@@ -1,5 +1,10 @@
 package com.wchamara.learnspringframework.game;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier("superContraQualifier")
 public class SuperContraGame implements GaminConsole {
 
     public void up() {
