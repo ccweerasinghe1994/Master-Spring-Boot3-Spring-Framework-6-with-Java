@@ -412,6 +412,8 @@ public class App02SpringFramwork {
 
 ## 012 Step 11 - Questions about Spring Framework - What will we learn
 
+![alt text](image-54.png)
+
 ## 013 Step 12 - Exploring Spring IOC Container - Application Context & Bean Factory
 
 ## 014 Step 13 - Exploring Java Bean vs POJO vs Spring Bean
