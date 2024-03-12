@@ -683,4 +683,27 @@ public class App03GamingBasicSpringBeans {
 
 ## 017 Step 16 - More Questions about Java Spring Framework - What will we learn
 
+![alt text](image-59.png)
+here we are creating the objects spring is managing the objects
+
+```java
+@Configuration
+public class GamingConfiguration {
+
+
+    @Bean
+    public GaminConsole game() {
+        return new PacmanGame();
+    }
+
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+}
+```
+
+![alt text](image-60.png)
+![alt text](image-61.png)
+
 ## 018 Step 17 - Exploring Spring Framework With Java - Section 1 - Review
