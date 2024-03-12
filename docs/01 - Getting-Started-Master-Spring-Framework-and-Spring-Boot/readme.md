@@ -171,7 +171,84 @@ this is called loose coupling.
 
 ![alt text](image-34.png)
 
+![alt text](image-36.png)
+
+for now JVM manages the objects. But we want to use the spring framework to manage the objects.
+
+now
+![alt text](image-37.png)
+
+this is what we want to achieve.
+![alt text](image-38.png)
+
+let's test the spring first
+![alt text](image-39.png)
+
 ## 008 Step 07 - Bringing in Spring Framework to Make Java App Loosely Coupled
+
+![alt text](image-41.png)
+![alt text](image-40.png)
+
+let's create a spring configuration file.
+
+![alt text](image-42.png)
+
+```java
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class HelloWorldConfiguration {
+
+}
+```
+
+![alt text](image-43.png)
+
+@configuration tells spring that this is a configuration file.
+
+now we can create a bean inside the configuration file.
+
+```java
+package com.wchamara.learnspringframework;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App02SpringFramwork {
+    public static void main(String[] args) {
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                HelloWorldConfiguration.class);
+    }
+
+}
+
+```
+
+![alt text](image-44.png)
+
+`Bean` is an object that is managed by the spring framework.
+
+let's ask spring to manage a bean called name
+
+![alt text](image-45.png)
+
+```java
+@Configuration
+public class HelloWorldConfiguration {
+    @Bean
+    public String name() {
+        return "Chamara11111111111";
+    }
+
+}
+```
+
+we can access the bean using the `context` object.
+
+```java
+System.out.println(context.getBean("name"));
+// Chamara11111111111
+```
 
 ## 009 Step 08 - Your First Java Spring Bean and Launching Java Spring Configuration
 
