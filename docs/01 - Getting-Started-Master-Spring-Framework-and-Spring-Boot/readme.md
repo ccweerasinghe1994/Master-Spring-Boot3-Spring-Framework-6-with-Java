@@ -283,3 +283,125 @@ Address[firtLine=No 123, secondLine=Galle Road, city=Colombo, country=Sri Lanka,
 ```
 
 ## 010 Step 09 - Creating More Java Spring Beans in Spring Java Configuration File
+
+![alt text](image-46.png)
+
+we can give custom names to spring beans
+
+```java
+    @Bean("yourCustomBeanName")
+    public Person person2() {
+        return new Person("Chamara", 31);
+    }
+```
+
+we can call the bean using the custom name
+
+```java
+        System.out.println(context.getBean("yourCustomBeanName"));
+```
+
+instead of the method name we can pass the class
+
+![alt text](image-47.png)
+
+we can call other beans inside a bean
+
+```java
+    @Bean
+    public String name() {
+        return "Chamara11111111111";
+    }
+
+    @Bean
+    public int age() {
+        return 30;
+    }
+
+    @Bean
+    public Person person3MethodCall() {
+        return new Person(name(), age());
+    }
+```
+
+we can use parameterized methods
+![alt text](image-49.png)
+
+```java
+package com.wchamara.learnspringframework;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Person
+ * String name
+ */
+record Person(String name, int age) {
+}
+
+record Address(String firtLine, String secondLine, String city, String country, String zipCode) {
+}
+
+@Configuration
+public class HelloWorldConfiguration {
+    @Bean
+    public String name() {
+        return "Chamara11111111111";
+    }
+
+    @Bean
+    public int age() {
+        return 30;
+    }
+
+    @Bean
+    public Address address() {
+        return new Address("No 123", "Galle Road", "Colombo", "Sri Lanka", "12345");
+    }
+
+    @Bean
+    public Person person1() {
+        return new Person("Chamara", 30);
+    }
+
+    @Bean("yourCustomBeanName")
+    public Person person2() {
+        return new Person("Chamara", 31);
+    }
+
+    @Bean
+    public Person person3MethodCall() {
+        return new Person(name(), age());
+    }
+
+    @Bean
+    public Person person4MethodCall(String name, int age) {
+        return new Person(name, age);
+    }
+
+}
+```
+
+```java
+package com.wchamara.learnspringframework;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App02SpringFramwork {
+    public static void main(String[] args) {
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                HelloWorldConfiguration.class);
+
+        System.out.println(context.getBean("name"));
+        System.out.println(context.getBean("age"));
+        System.out.println(context.getBean("address"));
+        System.out.println(context.getBean("person1"));
+        System.out.println(context.getBean("yourCustomBeanName"));
+        System.out.println(context.getBean("person3MethodCall"));
+        System.out.println(context.getBean("person4MethodCall"));
+    }
+
+}
+```
