@@ -264,6 +264,8 @@ Process finished with exit code 0
 
 ## 004 Step 03 - Primary and Qualifier - Which Spring Annotation Should You Use
 
+![alt text](image.png)
+
 ## 005 Step 04 - Exploring Spring Framework - Different Types of Dependency Injection
 
 ## 006 Step 05 - Java Spring Framework - Understanding Important Terminology
