@@ -11,10 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.wchamara.learnspringframework.game")
 public class App03GamingBasicSpringBeans {
-    @Bean
-    public GameRunner gameRunner(GaminConsole game) {
-        return new GameRunner(game);
-    }
 
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(

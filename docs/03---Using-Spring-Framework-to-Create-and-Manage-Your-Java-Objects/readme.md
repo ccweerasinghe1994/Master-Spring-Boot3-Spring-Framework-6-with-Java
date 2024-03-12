@@ -172,6 +172,30 @@ Process finished with exit code 0
 
 ```
 
+as you can see the application is running without any errors.
+
+but we are still creating the `GameRunner` object manually.
+
+let's make the `GameRunner` class a @Component.
+
+```java
+import org.springframework.stereotype.Component;
+
+@Component
+public class GameRunner {
+
+    private GaminConsole game;
+```
+
+and remove the `@Bean` method from the `App03GamingBasicSpringBeans` class.
+
+```java
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+```
+
 ## 003 Step 02 - Exploring Primary and Qualifier Annotations for Spring Components
 
 ## 004 Step 03 - Primary and Qualifier - Which Spring Annotation Should You Use
