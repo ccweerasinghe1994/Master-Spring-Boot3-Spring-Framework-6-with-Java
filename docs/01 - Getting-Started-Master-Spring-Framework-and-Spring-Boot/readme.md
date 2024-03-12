@@ -252,4 +252,34 @@ System.out.println(context.getBean("name"));
 
 ## 009 Step 08 - Your First Java Spring Bean and Launching Java Spring Configuration
 
+```java
+    @Bean
+    public String name() {
+        return "Chamara11111111111";
+    }
+
+    @Bean
+    public int age() {
+        return 30;
+    }
+
+    @Bean
+    public Address address() {
+        return new Address("No 123", "Galle Road", "Colombo", "Sri Lanka", "12345");
+    }
+```
+
+```java
+
+        System.out.println(context.getBean("name"));
+        System.out.println(context.getBean("age"));
+        System.out.println(context.getBean("address"));
+```
+
+```bash
+Chamara11111111111
+30
+Address[firtLine=No 123, secondLine=Galle Road, city=Colombo, country=Sri Lanka, zipCode=12345]
+```
+
 ## 010 Step 09 - Creating More Java Spring Beans in Spring Java Configuration File
