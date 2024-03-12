@@ -27,6 +27,51 @@ go to [start.spring.io](https://start.spring.io/)
 
 ## 006 Step 05 - Understanding Loose Coupling and Tight Coupling
 
+![alt text](image-24.png)
+
+let's say instead of running the supperContra game, we want to run the mario game. We would have to change the `GamingConsole` class to `MarioGame` class. This is called tight coupling. We want to avoid this.
+
+![alt text](image-25.png)
+
+```java
+package com.wchamara.learnspringframework.game;
+
+public class SuperContraGame {
+
+    public void up() {
+        System.out.println("Jumping");
+    }
+
+    public void down() {
+        System.out.println("sit down");
+    }
+
+    public void left() {
+        System.out.println("Go Back");
+    }
+
+    public void right() {
+        System.out.println("Fire a bullet");
+    }
+}
+```
+
+![alt text](image-26.png)
+
+as you can see GameRunner is tightly coupled with MarioGame. We want to avoid this.
+
+so now if we want to use the `SuperContraGame` class, we would have to change the `GameRunner` class to
+use the `SuperContraGame` class.
+
+![alt text](image-27.png)
+
+![alt text](image-28.png)
+
+now we can run the application with the `SuperContraGame` class.
+![alt text](image-29.png)
+
+![alt text](image-30.png)
+
 ## 007 Step 06 - Introducing Java Interface to Make App Loosely Coupled
 
 ## 008 Step 07 - Bringing in Spring Framework to Make Java App Loosely Coupled
@@ -34,18 +79,3 @@ go to [start.spring.io](https://start.spring.io/)
 ## 009 Step 08 - Your First Java Spring Bean and Launching Java Spring Configuration
 
 ## 010 Step 09 - Creating More Java Spring Beans in Spring Java Configuration File
-
-# 005 Step 04 - Getting Started with Java Gaming Application
-
-![alt text](image.png)
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
-
-![alt text](image-3.png)
-
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-7.png)
