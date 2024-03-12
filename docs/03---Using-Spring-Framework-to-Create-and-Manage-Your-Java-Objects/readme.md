@@ -509,6 +509,8 @@ Process finished with exit code 0
 
 ## 006 Step 05 - Java Spring Framework - Understanding Important Terminology
 
+![alt text](image-3.png)
+
 ## 007 Step 06 - Java Spring Framework - Comparing @Component vs @Bean
 
 ## 008 Step 07 - Why do we have dependencies in Java Spring Applications
