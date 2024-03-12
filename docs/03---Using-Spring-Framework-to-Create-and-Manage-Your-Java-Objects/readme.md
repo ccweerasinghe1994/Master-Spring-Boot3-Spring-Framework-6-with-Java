@@ -513,6 +513,8 @@ Process finished with exit code 0
 
 ## 007 Step 06 - Java Spring Framework - Comparing @Component vs @Bean
 
+![alt text](image-4.png)
+
 ## 008 Step 07 - Why do we have dependencies in Java Spring Applications
 
 ## 009 Step 08 - Exercise Solution for Real World Java Spring Framework Example
