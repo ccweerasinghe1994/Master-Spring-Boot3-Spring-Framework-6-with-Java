@@ -269,6 +269,239 @@ Process finished with exit code 0
 ## 005 Step 04 - Exploring Spring Framework - Different Types of Dependency Injection
 
 ![alt text](image-1.png)
+let's create a new Application Runner class.
+
+```java
+package com.wchamara.learnspringframework.examples.a1;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+
+@Configuration
+@ComponentScan
+public class DependencyInjectionAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                DependencyInjectionAppLauncherApplication.class);
+        ) {
+            Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+        }
+    }
+
+}
+
+```
+
+Field Injection
+
+```java
+package com.wchamara.learnspringframework.examples.a1;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+class YourBusinessClass {
+    @Autowired
+    private Dependency1 dependency1;
+    @Autowired
+    private Dependency2 dependency2;
+
+    @Override
+    public String toString() {
+        return "YourBusinessClass{" +
+                "dependency1=" + dependency1 +
+                ", dependency2=" + dependency2 +
+                '}';
+    }
+}
+
+@Component
+class Dependency1 {
+}
+
+@Component
+class Dependency2 {
+}
+
+
+@Configuration
+@ComponentScan
+public class DependencyInjectionAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                DependencyInjectionAppLauncherApplication.class);
+        ) {
+            System.out.println(context.getBean(YourBusinessClass.class));
+        }
+    }
+
+}
+```
+
+```bash
+C:\Users\USER\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\lib\idea_rt.jar=56947:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\USER\Documents\GitHub\Master-Spring-Boot3&Spring-Framework-6-with-Java\learn-spring-framework\target\classes;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.2\spring-boot-starter-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot\3.2.2\spring-boot-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\spring-context\6.1.3\spring-context-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-aop\6.1.3\spring-aop-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-beans\6.1.3\spring-beans-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-observation\1.12.2\micrometer-observation-1.12.2.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-commons\1.12.2\micrometer-commons-1.12.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.2\spring-boot-autoconfigure-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.2\spring-boot-starter-logging-3.2.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\USER\.m2\repository\org\slf4j\jul-to-slf4j\2.0.11\jul-to-slf4j-2.0.11.jar;C:\Users\USER\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\USER\.m2\repository\org\springframework\spring-core\6.1.3\spring-core-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-jcl\6.1.3\spring-jcl-6.1.3.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.11\slf4j-api-2.0.11.jar com.wchamara.learnspringframework.examples.a1.DependencyInjectionAppLauncherApplication
+YourBusinessClass{dependency1=com.wchamara.learnspringframework.examples.a1.Dependency1@20ccf40b, dependency2=com.wchamara.learnspringframework.examples.a1.Dependency2@2fb3536e}
+
+Process finished with exit code 0
+
+```
+
+Setter Injection
+
+```java
+package com.wchamara.learnspringframework.examples.a1;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+class YourBusinessClass {
+
+    private Dependency1 dependency1;
+
+    private Dependency2 dependency2;
+
+    @Autowired
+    public void setDependency1(Dependency1 dependency1) {
+        System.out.println("Setting dependency1");
+        this.dependency1 = dependency1;
+    }
+
+    @Autowired
+    public void setDependency2(Dependency2 dependency2) {
+        System.out.println("Setting dependency2");
+        this.dependency2 = dependency2;
+    }
+
+    @Override
+    public String toString() {
+        return "YourBusinessClass{" +
+                "dependency1=" + dependency1 +
+                ", dependency2=" + dependency2 +
+                '}';
+    }
+}
+
+@Component
+class Dependency1 {
+}
+
+@Component
+class Dependency2 {
+}
+
+
+@Configuration
+@ComponentScan
+public class DependencyInjectionAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                DependencyInjectionAppLauncherApplication.class);
+        ) {
+            System.out.println(context.getBean(YourBusinessClass.class));
+        }
+    }
+
+}
+
+```
+
+```bash
+C:\Users\USER\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\lib\idea_rt.jar=56975:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\USER\Documents\GitHub\Master-Spring-Boot3&Spring-Framework-6-with-Java\learn-spring-framework\target\classes;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.2\spring-boot-starter-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot\3.2.2\spring-boot-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\spring-context\6.1.3\spring-context-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-aop\6.1.3\spring-aop-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-beans\6.1.3\spring-beans-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-observation\1.12.2\micrometer-observation-1.12.2.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-commons\1.12.2\micrometer-commons-1.12.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.2\spring-boot-autoconfigure-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.2\spring-boot-starter-logging-3.2.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\USER\.m2\repository\org\slf4j\jul-to-slf4j\2.0.11\jul-to-slf4j-2.0.11.jar;C:\Users\USER\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\USER\.m2\repository\org\springframework\spring-core\6.1.3\spring-core-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-jcl\6.1.3\spring-jcl-6.1.3.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.11\slf4j-api-2.0.11.jar com.wchamara.learnspringframework.examples.a1.DependencyInjectionAppLauncherApplication
+Setting dependency1
+Setting dependency2
+YourBusinessClass{dependency1=com.wchamara.learnspringframework.examples.a1.Dependency1@17497425, dependency2=com.wchamara.learnspringframework.examples.a1.Dependency2@f0da945}
+
+Process finished with exit code 0
+
+```
+
+Constructor Injection
+
+```java
+package com.wchamara.learnspringframework.examples.a1;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+class YourBusinessClass {
+
+    private final Dependency1 dependency1;
+
+    private final Dependency2 dependency2;
+
+    @Autowired
+    public YourBusinessClass(Dependency1 dependency1, Dependency2 dependency2) {
+        System.out.println("YourBusinessClass constructor");
+        this.dependency1 = dependency1;
+        this.dependency2 = dependency2;
+    }
+
+    @Override
+    public String toString() {
+        return "YourBusinessClass{" +
+                "dependency1=" + dependency1 +
+                ", dependency2=" + dependency2 +
+                '}';
+    }
+}
+
+@Component
+class Dependency1 {
+}
+
+@Component
+class Dependency2 {
+}
+
+
+@Configuration
+@ComponentScan
+public class DependencyInjectionAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                DependencyInjectionAppLauncherApplication.class);
+        ) {
+            System.out.println(context.getBean(YourBusinessClass.class));
+        }
+    }
+
+}
+
+```
+
+```bash
+C:\Users\USER\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\lib\idea_rt.jar=56990:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\USER\Documents\GitHub\Master-Spring-Boot3&Spring-Framework-6-with-Java\learn-spring-framework\target\classes;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.2\spring-boot-starter-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot\3.2.2\spring-boot-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\spring-context\6.1.3\spring-context-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-aop\6.1.3\spring-aop-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-beans\6.1.3\spring-beans-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-observation\1.12.2\micrometer-observation-1.12.2.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-commons\1.12.2\micrometer-commons-1.12.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.2\spring-boot-autoconfigure-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.2\spring-boot-starter-logging-3.2.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\USER\.m2\repository\org\slf4j\jul-to-slf4j\2.0.11\jul-to-slf4j-2.0.11.jar;C:\Users\USER\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\USER\.m2\repository\org\springframework\spring-core\6.1.3\spring-core-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-jcl\6.1.3\spring-jcl-6.1.3.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.11\slf4j-api-2.0.11.jar com.wchamara.learnspringframework.examples.a1.DependencyInjectionAppLauncherApplication
+YourBusinessClass constructor
+YourBusinessClass{dependency1=com.wchamara.learnspringframework.examples.a1.Dependency1@1a18644, dependency2=com.wchamara.learnspringframework.examples.a1.Dependency2@5acf93bb}
+
+Process finished with exit code 0
+
+```
 
 ## 006 Step 05 - Java Spring Framework - Understanding Important Terminology
 
