@@ -196,6 +196,9 @@ and remove the `@Bean` method from the `App03GamingBasicSpringBeans` class.
     }
 ```
 
+by doing so we were able to remove the `@Bean` method from the `App03GamingBasicSpringBeans` class.
+and let spring create the `GameRunner` object for us.
+
 ## 003 Step 02 - Exploring Primary and Qualifier Annotations for Spring Components
 
 ## 004 Step 03 - Primary and Qualifier - Which Spring Annotation Should You Use
