@@ -1,4 +1,5 @@
-package com.wchamara.learnspringframework;
+package com.wchamara.learnspringframework.helloworld;
+
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -53,5 +54,4 @@ public class HelloWorldConfiguration {
     public Person person4MethodCall(String name, int age, @Qualifier("addressQualifier") Address address) {
         return new Person(name, age, address);
     }
-
 }
