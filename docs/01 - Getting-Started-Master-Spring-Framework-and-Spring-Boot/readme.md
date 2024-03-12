@@ -632,6 +632,55 @@ Person[name=Chamara11111111111, age=30, address=Address[firtLine=No 123, secondL
 
 ## 016 Step 15 - Using Spring Framework to Manage Beans for Java Gaming App
 
+let's create a configuration to manage the Game Spring context.
+
+```java
+package com.wchamara.learnspringframework;
+
+import com.wchamara.learnspringframework.game.GameRunner;
+import com.wchamara.learnspringframework.game.GaminConsole;
+import com.wchamara.learnspringframework.game.PacmanGame;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class GamingConfiguration {
+
+
+    @Bean
+    public GaminConsole game() {
+        return new PacmanGame();
+    }
+
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+}
+```
+
+let's create a new class to run the game.
+
+```java
+package com.wchamara.learnspringframework;
+
+import com.wchamara.learnspringframework.game.GameRunner;
+import com.wchamara.learnspringframework.game.PacmanGame;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App03GamingBasicSpringBeans {
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                GamingConfiguration.class);
+        ) {
+            var gameRunner = context.getBean(GameRunner.class);
+            gameRunner.run();
+        }
+    }
+
+}
+```
+
 ## 017 Step 16 - More Questions about Java Spring Framework - What will we learn
 
 ## 018 Step 17 - Exploring Spring Framework With Java - Section 1 - Review
