@@ -503,6 +503,10 @@ Process finished with exit code 0
 
 ```
 
+@Autowire is not required for constructor injection.
+
+![alt text](image-2.png)
+
 ## 006 Step 05 - Java Spring Framework - Understanding Important Terminology
 
 ## 007 Step 06 - Java Spring Framework - Comparing @Component vs @Bean
