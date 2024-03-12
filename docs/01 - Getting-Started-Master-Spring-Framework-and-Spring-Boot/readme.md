@@ -74,6 +74,103 @@ now we can run the application with the `SuperContraGame` class.
 
 ## 007 Step 06 - Introducing Java Interface to Make App Loosely Coupled
 
+![alt text](image-31.png)
+
+let's create a `GamingConsole` interface.
+
+```java
+package com.wchamara.learnspringframework.game;
+
+/**
+ * The GaminConsole interface represents a gaming console's basic controls.
+ * It provides methods to simulate the four main directions of movement in a game: up, down, left, and right.
+ */
+public interface GaminConsole {
+
+    /**
+     * Simulates the action of moving up in a game.
+     */
+    void up();
+
+    /**
+     * Simulates the action of moving down in a game.
+     */
+    void down();
+
+    /**
+     * Simulates the action of moving left in a game.
+     */
+    void left();
+
+    /**
+     * Simulates the action of moving right in a game.
+     */
+    void right();
+
+}
+```
+
+then we can implement the `GamingConsole` interface in the `SuperContraGame` class.
+
+```java
+package com.wchamara.learnspringframework.game;
+
+public class SuperContraGame implements GaminConsole {
+
+    public void up() {
+        System.out.println("Jumping");
+    }
+
+    public void down() {
+        System.out.println("sit down");
+    }
+
+    public void left() {
+        System.out.println("Go Back");
+    }
+
+    public void right() {
+        System.out.println("Fire a bullet");
+    }
+}
+```
+
+now we can rename the variable to a more abstract name
+
+![alt text](image-32.png)
+
+now inside the gamerunner class, we can use the `GamingConsole` interface instead of the `SuperContraGame` class.
+
+```java
+package com.wchamara.learnspringframework.game;
+
+public class GameRunner {
+
+    private GaminConsole game;
+
+    public GameRunner(GaminConsole game) {
+        this.game = game;
+    }
+
+    public void run() {
+        System.out.println("Running the game..." + game);
+        game.up();
+        game.down();
+        game.left();
+        game.right();
+    }
+
+}
+```
+
+now we can use any class that implements the `GamingConsole` interface.
+
+![alt text](image-33.png)
+
+this is called loose coupling.
+
+![alt text](image-34.png)
+
 ## 008 Step 07 - Bringing in Spring Framework to Make Java App Loosely Coupled
 
 ## 009 Step 08 - Your First Java Spring Bean and Launching Java Spring Configuration
