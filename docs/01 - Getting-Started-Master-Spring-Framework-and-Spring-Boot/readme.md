@@ -486,6 +486,150 @@ class JavaBean implements Serializable {
 
 ## 015 Step 14 - Exploring Spring Framework Bean Auto Wiring - Primary & Qualifier
 
+```java
+package com.wchamara.learnspringframework;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Arrays;
+
+public class App02SpringFramwork {
+    public static void main(String[] args) {
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                HelloWorldConfiguration.class);
+//        this is called method reference
+        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+    }
+
+}
+
+```
+
+```bash
+org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+org.springframework.context.annotation.internalCommonAnnotationProcessor
+org.springframework.context.event.internalEventListenerProcessor
+org.springframework.context.event.internalEventListenerFactory
+helloWorldConfiguration
+name
+age
+address
+person1
+yourCustomBeanName
+person3MethodCall
+person4MethodCall
+```
+
+when we have multiple beans of the same type, spring will not know which bean to use. We can use the `@Primary` annotation to tell spring which bean to use.
+
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+
+    @Bean
+    @Primary
+    public Person person1() {
+        return new Person("Chamara", 30);
+    }
+```
+
+also we can use @Qualifier to tell spring which bean to use.
+
+```java
+import org.springframework.beans.factory.annotation.Qualifier;
+
+    @Bean
+    public Person person4MethodCall(@Qualifier("name") String name, @Qualifier("age") int age) {
+        return new Person(name, age);
+    }
+```
+
+```java
+        System.out.println(context.getBean("person1"));
+        System.out.println(context.getBean("yourCustomBeanName"));
+        System.out.println(context.getBean("person3MethodCall"));
+        System.out.println(context.getBean("person4MethodCall"));
+```
+
+```bash
+Person[name=Chamara, age=30]
+Person[name=Chamara, age=31]
+Person[name=Chamara11111111111, age=30]
+Person[name=Chamara11111111111, age=30]
+```
+
+```java
+package com.wchamara.learnspringframework;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+/**
+ * Person
+ * String name
+ */
+record Person(String name, int age, Address address) {
+}
+
+record Address(String firtLine, String secondLine, String city, String country, String zipCode) {
+}
+
+@Configuration
+public class HelloWorldConfiguration {
+    @Bean
+    public String name() {
+        return "Chamara11111111111";
+    }
+
+    @Bean
+    public int age() {
+        return 30;
+    }
+
+    @Bean
+    @Qualifier("addressQualifier")
+    public Address address() {
+        return new Address("No 123", "Galle Road", "Colombo", "Sri Lanka", "12345");
+    }
+
+    @Bean
+    @Primary
+    public Person person1() {
+        return new Person("Chamara", 30, address());
+    }
+
+    @Bean("yourCustomBeanName")
+    public Person person2() {
+        return new Person("Chamara", 31, address());
+    }
+
+    @Bean
+    public Person person3MethodCall() {
+        return new Person(name(), age(), address());
+    }
+
+    @Bean
+    public Person person4MethodCall(String name, int age, @Qualifier("addressQualifier") Address address) {
+        return new Person(name, age, address);
+    }
+
+}
+
+```
+
+```bash
+Person[name=Chamara, age=30, address=Address[firtLine=No 123, secondLine=Galle Road, city=Colombo, country=Sri Lanka, zipCode=12345]]
+Person[name=Chamara11111111111, age=30, address=Address[firtLine=No 123, secondLine=Galle Road, city=Colombo, country=Sri Lanka, zipCode=12345]]       
+```
+
+![alt text](image-58.png)
+
 ## 016 Step 15 - Using Spring Framework to Manage Beans for Java Gaming App
 
 ## 017 Step 16 - More Questions about Java Spring Framework - What will we learn
