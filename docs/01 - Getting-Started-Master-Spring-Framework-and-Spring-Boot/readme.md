@@ -707,3 +707,6 @@ public class GamingConfiguration {
 ![alt text](image-61.png)
 
 ## 018 Step 17 - Exploring Spring Framework With Java - Section 1 - Review
+
+![alt text](image-62.png)
+![alt text](image-63.png)
