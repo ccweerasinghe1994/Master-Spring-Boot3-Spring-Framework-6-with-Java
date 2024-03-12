@@ -6,10 +6,16 @@
 ![alt text](image-11.png)
 ![alt text](image-12.png)
 
-
 ## 003 Step 02 - Getting Started with Java Spring Framework
 
+![alt text](image-13.png)
+![alt text](image-14.png)
+![go to start.spring.io](image-15.png)
+
 ## 004 Step 03 - Creating a New Spring Framework Project with Maven and Java
+
+go to [start.spring.io](https://start.spring.io/)
+![alt text](image-16.png)
 
 ## 005 Step 04 - Getting Started with Java Gaming Application
 
