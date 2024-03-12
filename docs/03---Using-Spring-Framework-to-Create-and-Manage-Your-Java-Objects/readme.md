@@ -2,6 +2,176 @@
 
 ## 001 Step 01 - Getting Spring Framework to Create and Manage Your Java Objects
 
+we can't have two public classes in the same file.
+
+let's move the GamingConfiguration class to the `App03GamingBasicSpringBeans` class.
+
+```java
+package com.wchamara.learnspringframework;
+
+import com.wchamara.learnspringframework.game.GameRunner;
+import com.wchamara.learnspringframework.game.PacmanGame;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+@Configuration
+class GamingConfiguration {
+    @Bean
+    public GaminConsole game() {
+        return new PacmanGame();
+    }
+
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+}
+
+public class App03GamingBasicSpringBeans {
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                GamingConfiguration.class);
+        ) {
+            var gameRunner = context.getBean(GameRunner.class);
+            gameRunner.run();
+        }
+    }
+
+}
+```
+
+let's move the means inside the `App03GamingBasicSpringBeans` class.
+
+```java
+package com.wchamara.learnspringframework;
+
+import com.wchamara.learnspringframework.game.GameRunner;
+import com.wchamara.learnspringframework.game.GaminConsole;
+import com.wchamara.learnspringframework.game.PacmanGame;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class App03GamingBasicSpringBeans {
+    @Bean
+    public GaminConsole game() {
+        return new PacmanGame();
+    }
+
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                App03GamingBasicSpringBeans.class);
+        ) {
+            var gameRunner = context.getBean(GameRunner.class);
+            gameRunner.run();
+        }
+    }
+
+}
+```
+
+we have simplify the code by removing the `GamingConfiguration` class and moving the `@Bean` methods to the `App03GamingBasicSpringBeans` class.
+
+but we are still creating the objects manually.
+
+let's make the MarioGame class a @Component.
+@Componet is a stereotype annotation.
+which means it is a special kind of annotation that tells spring that this class is a spring
+component.
+
+```java
+package com.wchamara.learnspringframework.game;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class PacmanGame implements GaminConsole {
+
+    public void up() {
+```
+
+let's run the application
+
+```bash
+16:02:24.427 [main] WARN org.springframework.context.annotation.AnnotationConfigApplicationContext -- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'gameRunner' defined in com.wchamara.learnspringframework.App03GamingBasicSpringBeans: Unsatisfied dependency expressed through method 'gameRunner' parameter 0: No qualifying bean of type 'com.wchamara.learnspringframework.game.GaminConsole' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'gameRunner' defined in com.wchamara.learnspringframework.App03GamingBasicSpringBeans: Unsatisfied dependency expressed through method 'gameRunner' parameter 0: No qualifying bean of type 'com.wchamara.learnspringframework.game.GaminConsole' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+ at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
+ at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:542)
+ at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334)
+ at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1164)
+ at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+ at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+ at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+ at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+ at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+ at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+ at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+ at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:959)
+ at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+ at org.springframework.context.annotation.AnnotationConfigApplicationContext.<init>(AnnotationConfigApplicationContext.java:93)
+ at com.wchamara.learnspringframework.App03GamingBasicSpringBeans.main(App03GamingBasicSpringBeans.java:19)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.wchamara.learnspringframework.game.GaminConsole' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+ at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880)
+ at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406)
+ at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353)
+ at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:907)
+ at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:785)
+ ... 14 more
+
+Process finished with exit code 1
+```
+
+as you can see we have an error.
+because spring doesn't know where to find the `PacmanGame` bean.
+
+so we have add @ComponentScan to the `App03GamingBasicSpringBeans` class.
+
+```java
+learn-spring-framework\src\main\java\com\wchamara\learnspringframework\App03GamingBasicSpringBeans.java
+package com.wchamara.learnspringframework;
+
+import com.wchamara.learnspringframework.game.GameRunner;
+import com.wchamara.learnspringframework.game.GaminConsole;
+import com.wchamara.learnspringframework.game.PacmanGame;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com.wchamara.learnspringframework.game")
+public class App03GamingBasicSpringBeans {
+    @Bean
+    public GameRunner gameRunner(GaminConsole game) {
+        return new GameRunner(game);
+    }
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                App03GamingBasicSpringBeans.class);
+        ) {
+            var gameRunner = context.getBean(GameRunner.class);
+            gameRunner.run();
+```
+
+let's run the application
+
+```bash
+C:\Users\USER\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\lib\idea_rt.jar=61837:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\USER\Documents\GitHub\Master-Spring-Boot3&Spring-Framework-6-with-Java\learn-spring-framework\target\classes;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.2\spring-boot-starter-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot\3.2.2\spring-boot-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\spring-context\6.1.3\spring-context-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-aop\6.1.3\spring-aop-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-beans\6.1.3\spring-beans-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-observation\1.12.2\micrometer-observation-1.12.2.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-commons\1.12.2\micrometer-commons-1.12.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.2\spring-boot-autoconfigure-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.2\spring-boot-starter-logging-3.2.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\USER\.m2\repository\org\slf4j\jul-to-slf4j\2.0.11\jul-to-slf4j-2.0.11.jar;C:\Users\USER\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\USER\.m2\repository\org\springframework\spring-core\6.1.3\spring-core-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-jcl\6.1.3\spring-jcl-6.1.3.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.11\slf4j-api-2.0.11.jar com.wchamara.learnspringframework.App03GamingBasicSpringBeans
+Running the game...com.wchamara.learnspringframework.game.PacmanGame@2805d709
+Going up
+Going down
+Going left
+Going right
+
+Process finished with exit code 0
+
+```
+
 ## 003 Step 02 - Exploring Primary and Qualifier Annotations for Spring Components
 
 ## 004 Step 03 - Primary and Qualifier - Which Spring Annotation Should You Use
