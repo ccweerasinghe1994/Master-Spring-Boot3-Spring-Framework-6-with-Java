@@ -295,6 +295,8 @@ Process finished with exit code 0
 
 ## 007 Step 06 - Evolution of Jakarta EE - Comparing with J2EE and Java EE
 
+![alt text](image-4.png)
+![alt text](image-5.png)
 ## 008 Step 07 - Exploring Jakarta CDI with Spring Framework and Java
 
 ## 010 Step 08 - Exploring Java Spring XML Configuration
