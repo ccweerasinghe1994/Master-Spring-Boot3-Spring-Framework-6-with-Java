@@ -156,6 +156,8 @@ as you can see `ClassB` is initialized when we use it.
 
 ## 003 Step 02 - Comparing Lazy Initialization vs Eager Initialization
 
+![alt text](image-1.png)
+
 ## 004 Step 03 - Exploring Java Spring Framework Bean Scopes - Prototype and Singleton
 
 ## 005 Step 04 - Comparing Prototype vs Singleton - Spring Framework Bean Scopes
