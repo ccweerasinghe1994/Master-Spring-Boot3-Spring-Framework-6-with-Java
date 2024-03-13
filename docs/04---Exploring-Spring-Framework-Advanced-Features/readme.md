@@ -226,6 +226,73 @@ com.wchamara.learnspringframework.examples.a4.ScopedClass@67c33749
 
 ## 006 Step 05 - Exploring Spring Beans - PostConstruct and PreDestroy
 
+```java
+package com.wchamara.learnspringframework.examples.a5;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+class SomeClass {
+    private final SomeDependency someDependency;
+
+    public SomeClass(SomeDependency someDependency) {
+        this.someDependency = someDependency;
+        System.out.println("All Dependencies are ready");
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Init");
+        someDependency.doSomething();
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("Destroy");
+    }
+
+}
+
+@Component
+class SomeDependency {
+
+    public void doSomething() {
+        System.out.println("Doing something");
+    }
+}
+
+@Configuration
+@ComponentScan
+public class PreConstructPostConstructAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                PreConstructPostConstructAppLauncherApplication.class);
+        ) {
+//            Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+        }
+    }
+
+}
+
+```
+
+```shell
+All Dependencies are ready
+Init
+Doing something
+Destroy
+
+Process finished with exit code 0
+```
+
 ## 007 Step 06 - Evolution of Jakarta EE - Comparing with J2EE and Java EE
 
 ## 008 Step 07 - Exploring Jakarta CDI with Spring Framework and Java
