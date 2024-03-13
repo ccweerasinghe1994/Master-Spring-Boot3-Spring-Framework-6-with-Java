@@ -308,6 +308,11 @@ Process finished with exit code 0
 
 ## 012 Step 10 - Exploring Spring Framework Stereotype Annotations - Component and more
 
+![alt text](image-17.png)
+![alt text](image-16.png)
+![alt text](image-19.png)
+![alt text](image-18.png)
+
 ## 013 Step 11 - Quick Review - Important Spring Framework Annotations
 
 ![alt text](image-6.png)
