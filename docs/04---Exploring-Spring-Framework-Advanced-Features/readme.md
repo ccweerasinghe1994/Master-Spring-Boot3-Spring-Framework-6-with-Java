@@ -297,6 +297,7 @@ Process finished with exit code 0
 
 ![alt text](image-4.png)
 ![alt text](image-5.png)
+
 ## 008 Step 07 - Exploring Jakarta CDI with Spring Framework and Java
 
 ## 010 Step 08 - Exploring Java Spring XML Configuration
@@ -306,6 +307,10 @@ Process finished with exit code 0
 ## 012 Step 10 - Exploring Spring Framework Stereotype Annotations - Component and more
 
 ## 013 Step 11 - Quick Review - Important Spring Framework Annotations
+
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
 
 ## 014 Step 12 - Quick Review - Important Spring Framework Concepts
 
