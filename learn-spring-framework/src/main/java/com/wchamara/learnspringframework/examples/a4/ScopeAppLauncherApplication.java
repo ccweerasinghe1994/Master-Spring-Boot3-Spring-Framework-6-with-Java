@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 @Component
 class NormalClass {
 }
@@ -21,11 +19,11 @@ class ScopedClass {
 
 @Configuration
 @ComponentScan
-public class SimpleLauncherAppLauncherApplication {
+public class ScopeAppLauncherApplication {
 
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                SimpleLauncherAppLauncherApplication.class);
+                ScopeAppLauncherApplication.class);
         ) {
             System.out.println(context.getBean(NormalClass.class));
             System.out.println(context.getBean(NormalClass.class));

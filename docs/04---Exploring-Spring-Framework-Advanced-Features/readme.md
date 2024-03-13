@@ -160,6 +160,66 @@ as you can see `ClassB` is initialized when we use it.
 
 ## 004 Step 03 - Exploring Java Spring Framework Bean Scopes - Prototype and Singleton
 
+```java
+package com.wchamara.learnspringframework.examples.a4;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+class NormalClass {
+}
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+class ScopedClass {
+}
+
+
+@Configuration
+@ComponentScan
+public class ScopeAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                ScopeAppLauncherApplication.class);
+        ) {
+            System.out.println(context.getBean(NormalClass.class));
+            System.out.println(context.getBean(NormalClass.class));
+            System.out.println(context.getBean(NormalClass.class));
+            System.out.println(context.getBean(NormalClass.class));
+
+            System.out.println(context.getBean(ScopedClass.class));
+            System.out.println(context.getBean(ScopedClass.class));
+            System.out.println(context.getBean(ScopedClass.class));
+            System.out.println(context.getBean(ScopedClass.class));
+            System.out.println(context.getBean(ScopedClass.class));
+
+        }
+    }
+
+}
+
+```
+
+```shell
+com.wchamara.learnspringframework.examples.a4.NormalClass@581ac8a8
+com.wchamara.learnspringframework.examples.a4.NormalClass@581ac8a8
+com.wchamara.learnspringframework.examples.a4.NormalClass@581ac8a8
+com.wchamara.learnspringframework.examples.a4.NormalClass@581ac8a8
+com.wchamara.learnspringframework.examples.a4.ScopedClass@6d4e5011
+com.wchamara.learnspringframework.examples.a4.ScopedClass@57d7f8ca
+com.wchamara.learnspringframework.examples.a4.ScopedClass@76c3e77a
+com.wchamara.learnspringframework.examples.a4.ScopedClass@78123e82
+com.wchamara.learnspringframework.examples.a4.ScopedClass@67c33749
+```
+
+![alt text](image-2.png)
+
 ## 005 Step 04 - Comparing Prototype vs Singleton - Spring Framework Bean Scopes
 
 ## 006 Step 05 - Exploring Spring Beans - PostConstruct and PreDestroy
