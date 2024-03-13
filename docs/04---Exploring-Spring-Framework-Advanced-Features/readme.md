@@ -300,6 +300,74 @@ Process finished with exit code 0
 
 ## 008 Step 07 - Exploring Jakarta CDI with Spring Framework and Java
 
+![alt text](image-20.png)
+
+```xml
+<dependency>
+    <groupId>jakarta.inject</groupId>
+    <artifactId>jakarta.inject-api</artifactId>
+    <version>2.0.1</version>
+</dependency>
+```
+
+```java
+package com.wchamara.learnspringframework.examples.a6;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+
+@Named
+class BusinessService {
+    private DataService dataService;
+
+    @Inject
+    public void setDataService(DataService dataService) {
+        System.out.println("Setter Injection");
+        this.dataService = dataService;
+    }
+
+    public DataService getDataService() {
+        return dataService;
+    }
+}
+
+@Named
+class DataService {
+}
+
+@Configuration
+@ComponentScan
+public class SimpleLauncherAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SimpleLauncherAppLauncherApplication.class);
+        ) {
+            Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+        }
+    }
+
+}
+
+```
+
+```shell
+Setter Injection
+org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+org.springframework.context.annotation.internalCommonAnnotationProcessor
+org.springframework.context.event.internalEventListenerProcessor
+org.springframework.context.event.internalEventListenerFactory
+simpleLauncherAppLauncherApplication
+businessService
+dataService
+```
+
 ## 010 Step 08 - Exploring Java Spring XML Configuration
 
 ## 011 Step 09 - Explore Java Annotations vs XML Configuration - Java Spring Framework
