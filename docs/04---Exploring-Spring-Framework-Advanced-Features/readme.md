@@ -222,6 +222,8 @@ com.wchamara.learnspringframework.examples.a4.ScopedClass@67c33749
 
 ## 005 Step 04 - Comparing Prototype vs Singleton - Spring Framework Bean Scopes
 
+![alt text](image-3.png)
+
 ## 006 Step 05 - Exploring Spring Beans - PostConstruct and PreDestroy
 
 ## 007 Step 06 - Evolution of Jakarta EE - Comparing with J2EE and Java EE
