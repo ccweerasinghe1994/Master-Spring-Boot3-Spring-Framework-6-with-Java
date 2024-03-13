@@ -317,3 +317,8 @@ Process finished with exit code 0
 ![alt text](image-10.png)
 
 ## 015 Step 13 - Exploring Spring Big Picture - Framework, Modules and Projects
+
+![alt text](image-11.png)
+![alt text](image-12.png)
+![alt text](image-13.png)
+![alt text](image-14.png)
