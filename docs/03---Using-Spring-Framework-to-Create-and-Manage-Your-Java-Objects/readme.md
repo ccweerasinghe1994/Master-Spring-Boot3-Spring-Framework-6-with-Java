@@ -522,4 +522,116 @@ Process finished with exit code 0
 
 ## 009 Step 08 - Exercise Solution for Real World Java Spring Framework Example
 
+```java
+package com.wchamara.learnspringframework.doa;
+
+public interface DataService {
+    int[] retrieveAllData();
+}
+
+```
+
+```java
+package com.wchamara.learnspringframework.doa;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
+public class MongoDoaService implements DataService {
+    @Override
+    public int[] retrieveAllData() {
+        return new int[]{11111, 22321, 4322};
+    }
+}
+
+```
+
+```java
+package com.wchamara.learnspringframework.doa;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier("mysql")
+public class MySqlDoaService implements DataService {
+    @Override
+    public int[] retrieveAllData() {
+        return new int[]{1, 2, 3};
+    }
+}
+
+```
+
+```java
+package com.wchamara.learnspringframework.service;
+
+import com.wchamara.learnspringframework.doa.DataService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+@ComponentScan("com.wchamara.learnspringframework.doa")
+public class BusinessCalculationService {
+    private final DataService dataService;
+
+    public BusinessCalculationService(@Qualifier("mysql") DataService dataService) {
+        this.dataService = dataService;
+    }
+
+    public int getMax() {
+        return Arrays.stream(dataService.retrieveAllData()).max().orElse(0);
+    }
+}
+
+```
+
+```java
+package com.wchamara.learnspringframework.examples.a2;
+
+import com.wchamara.learnspringframework.service.BusinessCalculationService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+
+@Configuration
+@ComponentScan("com.wchamara.learnspringframework.service")
+public class SimpleLauncherAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SimpleLauncherAppLauncherApplication.class);
+        ) {
+            Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+            System.out.println(context.getBean(BusinessCalculationService.class).getMax());
+        }
+    }
+
+}
+```
+
+```bash
+C:\Users\USER\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\lib\idea_rt.jar=59474:C:\Users\USER\AppData\Local\Programs\IntelliJ IDEA Ultimate\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\USER\Documents\GitHub\Master-Spring-Boot3&Spring-Framework-6-with-Java\learn-spring-framework\target\classes;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.2\spring-boot-starter-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot\3.2.2\spring-boot-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\spring-context\6.1.3\spring-context-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-aop\6.1.3\spring-aop-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-beans\6.1.3\spring-beans-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-observation\1.12.2\micrometer-observation-1.12.2.jar;C:\Users\USER\.m2\repository\io\micrometer\micrometer-commons\1.12.2\micrometer-commons-1.12.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.2\spring-boot-autoconfigure-3.2.2.jar;C:\Users\USER\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.2\spring-boot-starter-logging-3.2.2.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\USER\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\USER\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\USER\.m2\repository\org\slf4j\jul-to-slf4j\2.0.11\jul-to-slf4j-2.0.11.jar;C:\Users\USER\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\USER\.m2\repository\org\springframework\spring-core\6.1.3\spring-core-6.1.3.jar;C:\Users\USER\.m2\repository\org\springframework\spring-jcl\6.1.3\spring-jcl-6.1.3.jar;C:\Users\USER\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\USER\.m2\repository\org\slf4j\slf4j-api\2.0.11\slf4j-api-2.0.11.jar com.wchamara.learnspringframework.examples.a2.SimpleLauncherAppLauncherApplication
+org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+org.springframework.context.annotation.internalCommonAnnotationProcessor
+org.springframework.context.event.internalEventListenerProcessor
+org.springframework.context.event.internalEventListenerFactory
+simpleLauncherAppLauncherApplication
+businessCalculationService
+mongoDoaService
+mySqlDoaService
+3
+
+Process finished with exit code 0
+
+```
+
 ## 010 Step 09 - Exploring Spring Framework With Java - Section 2 - Review

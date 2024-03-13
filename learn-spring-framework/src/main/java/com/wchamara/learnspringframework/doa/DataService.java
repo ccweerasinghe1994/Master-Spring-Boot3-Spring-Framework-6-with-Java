@@ -1,4 +1,4 @@
-package com.wchamara.learnspringframework.Dao;
+package com.wchamara.learnspringframework.doa;
 
 public interface DataService {
     int[] retrieveAllData();

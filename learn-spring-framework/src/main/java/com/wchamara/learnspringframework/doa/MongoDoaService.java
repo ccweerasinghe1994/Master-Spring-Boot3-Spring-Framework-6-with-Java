@@ -1,4 +1,4 @@
-package com.wchamara.learnspringframework.Dao;
+package com.wchamara.learnspringframework.doa;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
