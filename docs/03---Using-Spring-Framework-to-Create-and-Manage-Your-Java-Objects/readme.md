@@ -635,3 +635,5 @@ Process finished with exit code 0
 ```
 
 ## 010 Step 09 - Exploring Spring Framework With Java - Section 2 - Review
+
+![alt text](image-7.png)
