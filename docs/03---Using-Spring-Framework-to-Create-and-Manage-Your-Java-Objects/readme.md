@@ -517,6 +517,9 @@ Process finished with exit code 0
 
 ## 008 Step 07 - Why do we have dependencies in Java Spring Applications
 
+![alt text](image-5.png)
+![alt text](image-6.png)
+
 ## 009 Step 08 - Exercise Solution for Real World Java Spring Framework Example
 
 ## 010 Step 09 - Exploring Spring Framework With Java - Section 2 - Review
