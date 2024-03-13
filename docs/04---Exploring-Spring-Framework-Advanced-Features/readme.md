@@ -304,6 +304,8 @@ Process finished with exit code 0
 
 ## 011 Step 09 - Explore Java Annotations vs XML Configuration - Java Spring Framework
 
+![alt text](image-15.png)
+
 ## 012 Step 10 - Exploring Spring Framework Stereotype Annotations - Component and more
 
 ## 013 Step 11 - Quick Review - Important Spring Framework Annotations
