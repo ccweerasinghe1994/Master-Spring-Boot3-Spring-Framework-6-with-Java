@@ -314,4 +314,6 @@ Process finished with exit code 0
 
 ## 014 Step 12 - Quick Review - Important Spring Framework Concepts
 
+![alt text](image-10.png)
+
 ## 015 Step 13 - Exploring Spring Big Picture - Framework, Modules and Projects
