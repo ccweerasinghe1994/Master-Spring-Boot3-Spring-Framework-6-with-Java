@@ -370,6 +370,45 @@ dataService
 
 ## 010 Step 08 - Exploring Java Spring XML Configuration
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+    <bean id="myBean" class="java.lang.String">
+        <constructor-arg value="Hello, World!"/>
+    </bean>
+</beans>
+```
+
+```java
+package com.wchamara.learnspringframework.examples.a7;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Arrays;
+
+@Configuration
+@ComponentScan
+public class SimpleLauncherAppLauncherApplication {
+
+    public static void main(String[] args) {
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("configuration.xml");
+        ) {
+//            Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+            System.out.println(context.getBean("myBean"));
+        }
+    }
+
+}
+
+```
+
 ## 011 Step 09 - Explore Java Annotations vs XML Configuration - Java Spring Framework
 
 ![alt text](image-15.png)
