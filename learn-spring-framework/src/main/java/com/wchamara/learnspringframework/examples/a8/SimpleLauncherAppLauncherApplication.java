@@ -6,23 +6,17 @@ import java.util.List;
 public class SimpleLauncherAppLauncherApplication {
 
     public static void main(String[] args) {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
-//        printNumbers(numbers);
-        printListOfEvenNumbersFunctional(numbers);
+        List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "PCF", "Azure", "Docker", "Kubernetes");
+        printNamesStartWithSpringFunctional(courses);
+//        printNamesLengthGreaterThanFourFunctional(courses);
     }
 
-    public static void printNumbers(List<Integer> numbers) {
-        for (int number : numbers) {
-            System.out.println(number);
-        }
+    private static void printNamesLengthGreaterThanFourFunctional(List<String> courses) {
+        courses.stream().filter(course -> course.length() > 4).forEach(System.out::println);
     }
 
-    public static void printListOfNumbersFunctional(List<Integer> numbers) {
-        numbers.stream().forEach(System.out::println);
-    }
-
-    public static void printListOfEvenNumbersFunctional(List<Integer> numbers) {
-        numbers.stream().filter(number -> number % 2 == 0).forEach(System.out::println);
+    private static void printNamesStartWithSpringFunctional(List<String> courses) {
+        courses.stream().filter(course -> course.contains("Spring")).forEach(System.out::println);
     }
 
 }
