@@ -39,6 +39,44 @@ output:
 
 ## 002 Step 02 - Writing Your First Java Functional Program
 
+```java
+package com.wchamara.learnspringframework.examples.a8;
+
+
+import java.util.List;
+
+public class SimpleLauncherAppLauncherApplication {
+
+    public static void main(String[] args) {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+//        printNumbers(numbers);
+        printListOfNumbersFunctional(numbers);
+    }
+
+    public static void printNumbers(List<Integer> numbers) {
+        for (int number : numbers) {
+            System.out.println(number);
+        }
+    }
+
+    public static void printListOfNumbersFunctional(List<Integer> numbers) {
+        numbers.stream().forEach(System.out::println);
+    }
+
+}
+
+```
+
+output:
+
+```shell
+1
+2
+3
+4
+5
+```
+
 ## 003 Step 03 - Improving Java Functional Program with filter
 
 ## 004 Step 04 - Using Lambda Expression to enhance your Functional Program
