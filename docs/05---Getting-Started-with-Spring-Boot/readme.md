@@ -175,6 +175,8 @@ public class Course {
 
 ## 007 Step 06 - Understanding Spring Boot Magic - Spring Boot Starter Projects
 
+![alt text](image-15.png)
+
 ## 008 Step 07 - Understanding Spring Boot Magic - Auto Configuration
 
 ## 009 Step 08 - Build Faster with Spring Boot DevTools
