@@ -213,6 +213,65 @@ Docker
 Kubernetes
 ```
 
+```java
+package com.wchamara.learnspringframework.examples.a8;
+
+
+import java.util.Arrays;
+import java.util.List;
+
+public class SimpleLauncherAppLauncherApplication {
+    
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        numbers.stream()
+                .filter(e -> e % 2 == 0)
+                .map(e -> e * 2)
+                .forEach(System.out::println);
+    }
+
+
+}
+
+```
+
+```shell
+4
+8
+12
+```
+
 ## 007 Step 07 - Understanding Optional class in Java
 
-## 008 Step 08 - Quick Review of Functional Programming Basics
+![alt text](image.png)
+
+```java
+package com.wchamara.learnspringframework.examples.a8;
+
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class SimpleLauncherAppLauncherApplication {
+
+    public static void main(String[] args) {
+//        Optional
+        List<String> arguments = Arrays.asList(args);
+
+        Optional<String> first = Arrays.stream(args)
+                .filter(s -> s.startsWith("b")).findFirst();
+
+        if (first.isPresent()) {
+            System.out.println("First argument starting with b: " + first.get());
+        } else {
+            System.out.println("No argument starting with b");
+        }
+        Optional<String> value = Optional.of("Hello");
+        Optional<String> empty = Optional.empty();
+    }
+}
+
+```
+
+
