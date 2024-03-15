@@ -210,6 +210,32 @@ logging:
 
 ## 010 Step 09 - Get Production Ready with Spring Boot - 1 - Profiles
 
+![alt text](image-21.png)
+
+let's createa dev profile yml file `application-dev.yml` and `application-prod.yml`
+
+```yml
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+```
+
+```yml
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: info
+```
+
 ## 011 Step 10 - Get Production Ready with Spring Boot - 2 - ConfigurationProperties
 
 ## 012 Step 11 - Get Production Ready with Spring Boot - 3 - Embedded Servers
