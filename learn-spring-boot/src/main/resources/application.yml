@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: dev
   application:
     name: learn-spring-boot
 
@@ -8,3 +8,8 @@ logging:
   level:
     org:
       springframework: debug
+
+currency-service:
+  url: http://localhost:8000
+  username: user
+  password: password

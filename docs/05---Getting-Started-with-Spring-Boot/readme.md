@@ -236,7 +236,141 @@ logging:
       springframework: info
 ```
 
+let's set the active profile in the `application.yml` file
+
+```yml
+spring:
+  profiles:
+    active: prod
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+```
+
 ## 011 Step 10 - Get Production Ready with Spring Boot - 2 - ConfigurationProperties
+
+let's use @ConfigurationProperties to map the properties in the `application.yml` file to a class
+
+```yml
+spring:
+  profiles:
+    active: dev
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+currency-service:
+  url: http://localhost:8000
+  username: user
+  password: password
+
+```
+
+prod
+
+```yml
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+currency-service:
+  url: http://dev.currency-service.com
+  username: devuser
+  password: devpassword
+```
+
+dev
+
+```yml
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: info
+
+currency-service:
+  url: http://prod.currency-service.com
+  username: produser
+  password: prodpassword
+```
+
+```java
+package com.wchamara.learnspringboot;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@ConfigurationProperties(prefix = "currency-service")
+@Component
+public class CurrencyConfiguration {
+    private String url;
+    private String username;
+    private String password;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+```
+
+```java
+package com.wchamara.learnspringboot;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CurrencyController {
+    @Autowired
+    private CurrencyConfiguration currencyConfiguration;
+
+    @RequestMapping("/currency")
+    public CurrencyConfiguration getAllCourses() {
+
+        return currencyConfiguration;
+    }
+}
+
+```
+
+![alt text](image-22.png)
 
 ## 012 Step 11 - Get Production Ready with Spring Boot - 3 - Embedded Servers
 

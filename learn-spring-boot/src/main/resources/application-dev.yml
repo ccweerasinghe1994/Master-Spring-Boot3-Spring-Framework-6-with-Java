@@ -6,3 +6,8 @@ logging:
   level:
     org:
       springframework: debug
+
+currency-service:
+  url: http://dev.currency-service.com
+  username: devuser
+  password: devpassword
