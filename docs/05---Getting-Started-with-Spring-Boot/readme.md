@@ -179,6 +179,22 @@ public class Course {
 
 ## 008 Step 07 - Understanding Spring Boot Magic - Auto Configuration
 
+![alt text](image-16.png)
+![alt text](image-17.png)
+
+we can set the logging level in the `application.yml` file
+
+```yml
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+```
+
 ## 009 Step 08 - Build Faster with Spring Boot DevTools
 
 ## 010 Step 09 - Get Production Ready with Spring Boot - 1 - Profiles
