@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+currency-service:
+  url: http://dev.currency-service.com
+  username: devuser
+  password: devpassword

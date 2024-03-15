@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+currency-service:
+  url: http://localhost:8000
+  username: user
+  password: password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - env
