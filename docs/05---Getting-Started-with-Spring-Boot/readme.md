@@ -171,6 +171,8 @@ public class Course {
 
 ## 006 Step 05 - Understanding the Goal of Spring Boot
 
+![alt text](image-14.png)
+
 ## 007 Step 06 - Understanding Spring Boot Magic - Spring Boot Starter Projects
 
 ## 008 Step 07 - Understanding Spring Boot Magic - Auto Configuration
