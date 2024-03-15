@@ -438,4 +438,7 @@ management:
 
 ## 014 Step 13 - Understanding Spring Boot vs Spring vs Spring MVC
 
+![alt text](image-27.png)
+
 ## 015 Step 14 - Getting Started with Spring Boot - Review
+![alt text](image-28.png)
