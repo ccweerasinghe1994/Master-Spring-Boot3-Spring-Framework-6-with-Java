@@ -374,6 +374,27 @@ public class CurrencyController {
 
 ## 012 Step 11 - Get Production Ready with Spring Boot - 3 - Embedded Servers
 
+since we are using spring boot, we don't need to add the embedded server dependency, it's already included in the spring boot starter web dependency
+
+```xml
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+```
+
+so all we need to do is build the project and run it
+
+```shell
+mvn clean install
+```
+
+```shell
+java -jar target/learn-spring-boot-0.0.1-SNAPSHOT.jar
+```
+
+![alt text](image-23.png)
+
 ## 013 Step 12 - Get Production Ready with Spring Boot - 4 - Actuator
 
 ## 014 Step 13 - Understanding Spring Boot vs Spring vs Spring MVC
