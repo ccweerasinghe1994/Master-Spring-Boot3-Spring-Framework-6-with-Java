@@ -197,6 +197,17 @@ logging:
 
 ## 009 Step 08 - Build Faster with Spring Boot DevTools
 
+![alt text](image-19.png)
+
+```xml
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-devtools</artifactId>
+   <scope>runtime</scope>
+   <optional>true</optional>
+  </dependency>
+```
+
 ## 010 Step 09 - Get Production Ready with Spring Boot - 1 - Profiles
 
 ## 011 Step 10 - Get Production Ready with Spring Boot - 2 - ConfigurationProperties
