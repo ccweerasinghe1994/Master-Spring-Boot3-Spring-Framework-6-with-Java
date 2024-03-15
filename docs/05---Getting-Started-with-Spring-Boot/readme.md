@@ -89,6 +89,86 @@ java -jar target/learn-spring-boot-0.0.1-SNAPSHOT.jar
 
 ## 005 Step 04 - Build a Hello World API with Spring Boot
 
+![alt text](image-12.png)
+
+```java
+package com.wchamara.learnspringboot;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+public class CourseController {
+    @RequestMapping("/courses")
+    public List<Course> getAllCourses() {
+        return Arrays.asList(
+            new Course("Spring", "Spring Framework", "Spring Framework Description"),
+            new Course("Java", "Core Java", "Core Java Description"),
+            new Course("JavaScript", "JavaScript", "JavaScript Description")
+        );
+    }
+}
+
+```
+
+```java
+package com.wchamara.learnspringboot;
+
+import org.springframework.stereotype.Component;
+
+
+public class Course {
+    private String name;
+    private String description;
+    private String topic;
+
+    public Course(String name, String description, String topic) {
+        this.name = name;
+        this.description = description;
+        this.topic = topic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", topic='" + topic + '\'' +
+                '}';
+    }
+}
+
+```
+
+![alt text](image-13.png)
+
 ## 006 Step 05 - Understanding the Goal of Spring Boot
 
 ## 007 Step 06 - Understanding Spring Boot Magic - Spring Boot Starter Projects
