@@ -79,6 +79,26 @@ output:
 
 ## 003 Step 03 - Improving Java Functional Program with filter
 
+```java
+    public static void printListOfEvenNumbersFunctional(List<Integer> numbers) {
+        Predicate<Integer> predicate = number -> number % 2 == 0;
+        numbers.stream().filter(predicate).forEach(System.out::println);
+    }
+```
+
+```bash
+2
+4
+```
+
+let's improve the program to print the square of the even numbers.
+
+```java
+public static void printListOfEvenNumbersFunctional(List<Integer> numbers) {
+    numbers.stream().filter(number -> number % 2 == 0).forEach(System.out::println);
+}    
+```
+
 ## 004 Step 04 - Using Lambda Expression to enhance your Functional Program
 
 ## 005 Step 05 - Do Functional Programming Exercises with Streams, Filters and Lambdas
