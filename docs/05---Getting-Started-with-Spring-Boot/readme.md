@@ -397,6 +397,45 @@ java -jar target/learn-spring-boot-0.0.1-SNAPSHOT.jar
 
 ## 013 Step 12 - Get Production Ready with Spring Boot - 4 - Actuator
 
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+![alt text](image-24.png)
+![alt text](image-25.png)
+![alt text](image-26.png)
+
+```yml
+spring:
+  profiles:
+    active: dev
+  application:
+    name: learn-spring-boot
+
+logging:
+  level:
+    org:
+      springframework: debug
+
+currency-service:
+  url: http://localhost:8000
+  username: user
+  password: password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - env
+```
+
 ## 014 Step 13 - Understanding Spring Boot vs Spring vs Spring MVC
 
 ## 015 Step 14 - Getting Started with Spring Boot - Review
