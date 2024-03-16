@@ -8,3 +8,5 @@ create table course
 
 
 select * from course;
+
+

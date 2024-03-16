@@ -48,6 +48,53 @@ select * from course;
 
 ## 006 Step 05 - Inserting Hardcoded Data using Spring JDBC
 
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CourseJdbcRepository {
+    private static final String INSERT_SQL = """
+    insert into course (id, name, author) VALUES(2, 'book1','wchamara');
+    """;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void insert(){
+        jdbcTemplate.update(INSERT_SQL);
+    }
+
+
+}
+```
+
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+    @Autowired
+    private CourseJdbcRepository courseJdbcRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("✅✅✅✅✅✅✅✅✅✅✅✅✅ Inserting course via JDBC ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅");
+        courseJdbcRepository.insert();
+    }
+}
+
+```
+
+![alt text](image-8.png)
+
 ## 007 Step 06 - Inserting and Deleting Data using Spring JDBC
 
 ## 008 Step 07 - Querying Data using Spring JDBC
