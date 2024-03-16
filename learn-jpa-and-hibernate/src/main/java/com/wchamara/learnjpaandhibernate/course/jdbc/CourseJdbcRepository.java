@@ -1,6 +1,7 @@
 package com.wchamara.learnjpaandhibernate.course.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,10 @@ public class CourseJdbcRepository {
 
     public void deleteById(long id){
         jdbcTemplate.update("delete from course where id=?", id);
+    }
+
+    public Course findById(long id){
+        return jdbcTemplate.queryForObject("select * from course where id=?", new BeanPropertyRowMapper<>(Course.class),id);
     }
 
 

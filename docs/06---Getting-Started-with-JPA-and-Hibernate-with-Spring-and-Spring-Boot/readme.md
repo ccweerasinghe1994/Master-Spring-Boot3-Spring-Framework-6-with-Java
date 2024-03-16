@@ -204,6 +204,69 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 
 ## 008 Step 07 - Querying Data using Spring JDBC
 
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CourseJdbcRepository {
+    private static final String INSERT_SQL = """
+    insert into course (id, name, author) VALUES(2, 'book1','wchamara');
+    """;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void insert(){
+        jdbcTemplate.update(INSERT_SQL);
+    }
+
+    public void insertOne(Course course){
+        jdbcTemplate.update("insert into course (id, name, author) VALUES(?, ?, ?)", course.getId(), course.getName(), course.getAuthor());
+    }
+
+    public void deleteById(long id){
+        jdbcTemplate.update("delete from course where id=?", id);
+    }
+
+    public Course findById(long id){
+        return jdbcTemplate.queryForObject("select * from course where id=?", new BeanPropertyRowMapper<>(Course.class),id);
+    }
+
+
+}
+
+```
+
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+    @Autowired
+    private CourseJdbcRepository courseJdbcRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("✅✅✅✅✅✅✅✅✅✅✅✅✅ Inserting course via JDBC ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅");
+        courseJdbcRepository.insert();
+        courseJdbcRepository.insertOne(new Course(3, "book3", "wchamara"));
+
+        courseJdbcRepository.deleteById(1);
+        System.out.println("Course with id 1: " + courseJdbcRepository.findById(2));
+    }
+}
+
+```
+
 ## 009 Step 08 - Getting Started with JPA and EntityManager
 
 ## 010 Step 09 - Exploring the Magic of JPA
