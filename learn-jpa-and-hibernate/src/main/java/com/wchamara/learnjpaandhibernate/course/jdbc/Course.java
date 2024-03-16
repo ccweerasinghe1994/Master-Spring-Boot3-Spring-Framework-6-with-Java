@@ -1,7 +1,11 @@
 package com.wchamara.learnjpaandhibernate.course.jdbc;
 
-public class Course {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Course {
+    @Id
     private long id;
     private String name;
 

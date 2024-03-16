@@ -269,6 +269,95 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 
 ## 009 Step 08 - Getting Started with JPA and EntityManager
 
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc.jpa;
+
+import com.wchamara.learnjpaandhibernate.course.jdbc.Course;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class CourseJpaRepository {
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public void insert(Course course){
+        entityManager.merge(course);
+    }
+
+    public void insertOne(Course course){
+        entityManager.merge(course);
+    }
+
+    public Course findById(long id){
+        return entityManager.find(Course.class, id);
+    }
+
+    public void deleteById(long id){
+        Course course = findById(id);
+        entityManager.remove(course);
+    }
+}
+
+```
+
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Course {
+    @Id
+    private long id;
+    private String name;
+
+```
+
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import com.wchamara.learnjpaandhibernate.course.jdbc.jpa.CourseJpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+//    @Autowired
+//    private CourseJdbcRepository courseJdbcRepository;
+    @Autowired
+    private CourseJpaRepository repository;
+    @Override
+    public void run(String... args) throws Exception {
+//        repository.insert();
+        repository.insertOne(new Course(3, "book3", "wchamara"));
+//
+//        repository.deleteById(1);
+//        System.out.println("Course with id 1: " + repository.findById(2));
+    }
+}
+
+```
+
+```yml
+spring:
+  application:
+    name: learn-jpa-and-hibernate
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    show-sql: true
+
+```
+![alt text](image-10.png)
 ## 010 Step 09 - Exploring the Magic of JPA
 
 ## 011 Step 10 - Getting Started with Spring Data JPA
