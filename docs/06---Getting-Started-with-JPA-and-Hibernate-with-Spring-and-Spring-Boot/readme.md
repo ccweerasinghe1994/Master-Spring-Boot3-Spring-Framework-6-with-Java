@@ -41,6 +41,11 @@ select * from course;
 
 ## 005 Step 04 - Getting Started with Spring JDBC
 
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+
 ## 006 Step 05 - Inserting Hardcoded Data using Spring JDBC
 
 ## 007 Step 06 - Inserting and Deleting Data using Spring JDBC
