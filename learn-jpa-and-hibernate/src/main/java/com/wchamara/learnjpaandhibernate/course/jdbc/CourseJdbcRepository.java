@@ -17,5 +17,13 @@ public class CourseJdbcRepository {
         jdbcTemplate.update(INSERT_SQL);
     }
 
+    public void insertOne(Course course){
+        jdbcTemplate.update("insert into course (id, name, author) VALUES(?, ?, ?)", course.getId(), course.getName(), course.getAuthor());
+    }
+
+    public void deleteById(long id){
+        jdbcTemplate.update("delete from course where id=?", id);
+    }
+
 
 }
