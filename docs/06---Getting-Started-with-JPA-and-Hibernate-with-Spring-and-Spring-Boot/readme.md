@@ -357,8 +357,14 @@ spring:
     show-sql: true
 
 ```
+
 ![alt text](image-10.png)
+
 ## 010 Step 09 - Exploring the Magic of JPA
+
+![alt text](image-11.png)
+![alt text](image-12.png)
+![alt text](image-13.png)
 
 ## 011 Step 10 - Getting Started with Spring Data JPA
 
