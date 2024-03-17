@@ -415,6 +415,64 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 
 ```
 
+![alt text](image-15.png)
+
 ## 012 Step 11 - Exploring features of Spring Data JPA
+
+```java
+package com.wchamara.learnjpaandhibernate.course.springjpa;
+
+import com.wchamara.learnjpaandhibernate.course.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+
+public interface CourseSpringJpaRepository extends JpaRepository<Course, Long> {
+    List<com.wchamara.learnjpaandhibernate.course.Course> findByAuthor(String author);
+}
+
+```
+
+```java
+package com.wchamara.learnjpaandhibernate.course.jdbc;
+
+import com.wchamara.learnjpaandhibernate.course.Course;
+import com.wchamara.learnjpaandhibernate.course.springjpa.CourseSpringJpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+    //    @Autowired
+//    private CourseJdbcRepository courseJdbcRepository;
+    @Autowired
+    private CourseSpringJpaRepository repository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        Course course = new Course(1, "book1", "wchamara");
+        Course course2 = new Course(2, "book2", "wchamara");
+        Course course3 = new Course(3, "book3", "wchamara");
+        repository.save(course);
+        repository.save(course2);
+        repository.save(course3);
+
+        repository.deleteById(1L);
+
+        System.out.println("Course with id 1: " + repository.findById(1L));
+        System.out.println("Course with id 2: " + repository.findById(2L));
+
+        System.out.println(repository.findByAuthor("wchamara"));
+
+        //        repository.deleteById(1);
+//        System.out.println("Course with id 1: " + repository.findById(2));
+    }
+}
+
+```
+
+![alt text](image-16.png)
 
 ## 013 Step 12 - Understanding difference between Hibernate and JPA
