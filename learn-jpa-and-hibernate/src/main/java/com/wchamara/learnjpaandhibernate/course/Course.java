@@ -1,4 +1,4 @@
-package com.wchamara.learnjpaandhibernate.course.jdbc;
+package com.wchamara.learnjpaandhibernate.course;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,6 +1,6 @@
-package com.wchamara.learnjpaandhibernate.course.jdbc.jpa;
+package com.wchamara.learnjpaandhibernate.course.jpa;
 
-import com.wchamara.learnjpaandhibernate.course.jdbc.Course;
+import com.wchamara.learnjpaandhibernate.course.Course;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
