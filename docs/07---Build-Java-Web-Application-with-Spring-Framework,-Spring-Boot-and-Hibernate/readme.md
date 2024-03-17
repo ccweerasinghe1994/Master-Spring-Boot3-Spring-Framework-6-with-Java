@@ -434,6 +434,64 @@ public class LoginController {
 
 ## 015 Step 11 - Creating a Login Form
 
+```java
+package com.wchamara.myfirstwebapp.login;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class LoginController {
+
+    // http://localhost:8080/login?name=chamara
+
+    /**
+     * Handles the "/login" request mapping.
+     *
+     * @return The name of the view to be rendered.
+     */
+    @RequestMapping("/login")
+    public String login() {
+        // Return the name of the view to be rendered.
+        return "login";
+    }
+}
+```
+
+```html
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Well come to the login page </h1>
+
+<form action="" method="post">
+    Name:<input type="text" name="name">
+    Password:<input type="password" name="password">
+    <input type="submit">
+</form>
+</body>
+</html>
+```
+
+```
+The HTML document starts with the <html> tag and ends with the </html> tag. Inside these tags, there are two main sections: the <head> and the <body>.
+
+The <head> section contains meta-information about the HTML document that isn't displayed on the web page itself. In this case, it contains a <title> tag with the text "Login", which sets the title of the web page.
+
+The <body> section contains the content that is displayed on the web page. Here, it includes an <h1> tag, which is used for the main heading on the page. The text inside the <h1> tag is "Well come to the login page".
+
+The <body> section also contains a <form> element. This form is used to collect user input. The action attribute of the form is set to an empty string, which means the form will be submitted to the same URL that the page was loaded from. The method attribute is set to "post", which means the form data will be included in the body of the HTTP request when the form is submitted.
+
+Inside the form, there are two <input> elements for the user to enter their name and password. The type attribute of the first input is set to "text", which means it's a text field. The name attribute is set to "name", which will be the key for this data in the form submission. The second input is similar, but its type is set to "password", which means the input will be masked for privacy. Its name attribute is set to "password".
+
+Finally, there's another <input> element with type set to "submit". This creates a button that the user can click to submit the form. When the button is clicked, the form data (the name and password) will be sent to the server.
+```
+
+![alt text](image-16.png)
+![alt text](image-17.png)
+
 ## 016 Step 12 - Displaying Login Credentials in a JSP using Model
 
 ## 017 Step 13 - Add hard coded validation of userid and password
