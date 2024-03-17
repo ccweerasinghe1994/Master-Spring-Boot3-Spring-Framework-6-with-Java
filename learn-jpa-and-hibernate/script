@@ -1,0 +1,7 @@
+SELECT * FROM COURSE;
+
+INSERT INTO course(id, author, name) VALUES(1,'wchamara','book1');
+
+delete from course where id = 1;
+
+insert into course (id, name, author) VALUES(1, 'book1','wchamara');
