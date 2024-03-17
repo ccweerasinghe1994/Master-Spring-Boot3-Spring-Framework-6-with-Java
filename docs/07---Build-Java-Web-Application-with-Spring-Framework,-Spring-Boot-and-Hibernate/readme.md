@@ -77,6 +77,36 @@ spring:
 
 ## 005 Step 03 - First Spring MVC Controller, @ResponseBody, @Controller
 
+```java
+package com.wchamara.myfirstwebapp.hello;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class SayHelloController {
+    @RequestMapping("/say-hello")
+    @ResponseBody
+    public String sayHello() {
+        return "Hello, World!";
+    }
+}
+```
+
+This code is written in Java and uses the Spring Framework, a popular framework for building web applications in Java. The code defines a controller class, SayHelloController, which is responsible for handling incoming web requests.
+
+The @Controller annotation at the top of the class declaration is a special marker, telling Spring that this class should be treated as a controller. Controllers in Spring are components that handle HTTP requests and responses.
+
+Inside the SayHelloController class, there's a method named sayHello(). This method is annotated with @RequestMapping("/say-hello"), which tells Spring that this method should be invoked whenever there's an HTTP request to the "/say-hello" URL path.
+
+The @ResponseBody annotation indicates that the return value of the method should be sent straight to the HTTP response body. In other words, whatever string this method returns will be what the client (e.g., a web browser) receives.
+
+The sayHello() method itself is quite simple: it just returns the string "Hello, World!". So, when a client sends a request to "/say-hello", they will receive a response with "Hello, World!" as the body.
+
+In summary, this code sets up a simple web server that responds with "Hello, World!" when it receives a request at the "/say-hello" URL.
+
 ## 006 Step 04 - 01 - Enhancing Spring MVC Controller to provide HTML response
 
 ## 007 Step 04 - 02 - Exploring Step By Step Coding and Debugging Guide
