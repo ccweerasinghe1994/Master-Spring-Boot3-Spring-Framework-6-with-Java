@@ -159,6 +159,19 @@ Finally, the toString() method is called on the html object to convert the Strin
 
 ## 007 Step 04 - 02 - Exploring Step By Step Coding and Debugging Guide
 
+```xml
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+</dependency>
+```
+
+In this specific selection, a dependency for tomcat-embed-jasper is declared. This is a library provided by Apache Tomcat, which is an open-source implementation of the Java Servlet, JavaServer Pages, Java Expression Language, and Java WebSocket technologies.
+
+The tomcat-embed-jasper artifact provides the Jasper 2 JSP (JavaServer Pages) engine, which is used to compile JSPs into servlets. This dependency is typically included when you want to enable JSP support in an embedded Tomcat server.
+
+The groupId represents the project's group, artifactId is the name of the jar without version, and the version (not shown in the selection) would represent the version of the artifact.
+
 ## 009 Step 05 - Redirect to a JSP using Spring Boot - Controller, @ResponseBody & View
 
 ## 010 Step 06 - Exercise - Creating LoginController and login view
