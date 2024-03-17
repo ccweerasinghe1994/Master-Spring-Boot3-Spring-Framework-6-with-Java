@@ -280,6 +280,40 @@ Note that this snippet does not include a version element, which is typically us
 
 ## 010 Step 06 - Exercise - Creating LoginController and login view
 
+```jsp
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<form action="login.php" method="post">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit" value="Login">
+</form>
+<a href="register.php">Register</a>
+<a href="forgot.php">Forgot Password</a>
+</body>
+</html>
+```
+
+```java
+package com.wchamara.myfirstwebapp.login;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class LoginController {
+
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+}
+```
+
 ## 011 Step 07 - Quick Overview - How does web work - Request and Response
 
 ## 012 Step 08 - Capturing QueryParams using RequestParam and First Look at Model
