@@ -316,6 +316,8 @@ public class LoginController {
 
 ## 011 Step 07 - Quick Overview - How does web work - Request and Response
 
+![alt text](image-8.png)
+
 ## 012 Step 08 - Capturing QueryParams using RequestParam and First Look at Model
 
 ## 013 Step 09 - Quick Overview - Importance of Logging with Spring Boot
