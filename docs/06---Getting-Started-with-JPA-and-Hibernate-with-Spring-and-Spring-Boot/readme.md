@@ -476,3 +476,5 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 ![alt text](image-16.png)
 
 ## 013 Step 12 - Understanding difference between Hibernate and JPA
+
+![alt text](image-17.png)
