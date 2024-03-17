@@ -494,6 +494,39 @@ Finally, there's another <input> element with type set to "submit". This creates
 
 ## 016 Step 12 - Displaying Login Credentials in a JSP using Model
 
+```html
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Well come</h1>
+<h3>your name is ${name}</h3>
+<h3>your password is ${password}</h3>
+</body>
+</html>
+```
+
+```java
+/**
+ * Handles the "/login" POST request mapping.
+ *
+ * @param name     The name parameter from the request.
+ * @param password The password parameter from the request.
+ * @param model    The ModelMap object used to pass attributes to the view.
+ * @return         The name of the view to be rendered.
+ */
+@RequestMapping(value = "/login", method = RequestMethod.POST)
+public String gotToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
+    // Add the name and password attributes to the model.
+    model.put("name", name);
+    model.put("password", password);
+
+    // Return the name of the view to be rendered.
+    return "welcome";
+}
+```
+
 ## 017 Step 13 - Add hard coded validation of userid and password
 
 ## 018 Step 14 - Getting started with Todo Features - Creating Todo and TodoService
