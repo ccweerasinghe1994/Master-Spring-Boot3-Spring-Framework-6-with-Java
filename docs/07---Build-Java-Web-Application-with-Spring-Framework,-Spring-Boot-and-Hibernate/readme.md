@@ -11,7 +11,69 @@
 
 ## 003 Step 01 - Creating Spring Boot Web Application with Spring Initializr
 
+use [Spring Initializr](https://start.spring.io/)
+
+project: `Web`,`devtools` dependencies
+
 ## 004 Step 02 - Quick overview of Spring Boot Project
+
+```yml
+spring:
+  application:
+    name: myfirstwebapp
+```
+
+![alt text](image-6.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <parent>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+  <version>3.2.3</version>
+  <relativePath/> <!-- lookup parent from repository -->
+ </parent>
+ <groupId>com.wchamara</groupId>
+ <artifactId>myfirstwebapp</artifactId>
+ <version>0.0.1-SNAPSHOT</version>
+ <name>myfirstwebapp</name>
+ <description>Demo project for Spring Boot</description>
+ <properties>
+  <java.version>21</java.version>
+ </properties>
+ <dependencies>
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-devtools</artifactId>
+   <scope>runtime</scope>
+   <optional>true</optional>
+  </dependency>
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-test</artifactId>
+   <scope>test</scope>
+  </dependency>
+ </dependencies>
+
+ <build>
+  <plugins>
+   <plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+   </plugin>
+  </plugins>
+ </build>
+
+</project>
+```
 
 ## 005 Step 03 - First Spring MVC Controller, @ResponseBody, @Controller
 
