@@ -32,4 +32,14 @@ public class SayHelloController {
 
         return html.toString();
     }
+
+    /**
+     * Handles the request for "/say-hello-jsp" and returns the name of the JSP file to render.
+     *
+     * @return The name of the JSP file to render ("sayHello").
+     */
+    @RequestMapping("/say-hello-jsp")
+    public String sayHelloJsp() {
+        return "sayHello";
+    }
 }

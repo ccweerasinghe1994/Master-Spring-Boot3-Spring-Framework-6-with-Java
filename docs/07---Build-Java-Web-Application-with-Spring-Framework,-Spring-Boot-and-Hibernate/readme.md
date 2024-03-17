@@ -174,6 +174,110 @@ The groupId represents the project's group, artifactId is the name of the jar wi
 
 ## 009 Step 05 - Redirect to a JSP using Spring Boot - Controller, @ResponseBody & View
 
+```java
+package com.wchamara.myfirstwebapp.hello;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class SayHelloController {
+    @RequestMapping("/say-hello")
+    @ResponseBody
+    public String sayHello() {
+        return "Hello, World!";
+    }
+
+    @RequestMapping("/say-hello-in-html")
+    @ResponseBody
+    public String sayHelloInHTML() {
+
+        StringBuffer html = new StringBuffer();
+        html.append("<html>");
+        html.append("<head>");
+        html.append("<title>Home</title>");
+        html.append("</head>");
+        html.append("<body>");
+        html.append("<h1>Home</h1>");
+        html.append("<p>Welcome to the home page updated</p>");
+        html.append("<a href=\"about.php\">About</a>");
+        html.append("<a href=\"contact.php\">Contact</a>");
+        html.append("</body>");
+        html.append("</html>");
+
+
+        return html.toString();
+    }
+
+    /**
+         * Handles the request for "/say-hello-jsp" and returns the name of the JSP file to render.
+         *
+         * @return The name of the JSP file to render ("sayHello").
+         */
+        @RequestMapping("/say-hello-jsp")
+        public String sayHelloJsp() {
+            return "sayHello";
+        }
+}
+```
+
+![alt text](image-7.png)
+
+```jsp
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Home of JSP</h1>
+<p>Welcome to the home page</p>
+<a href="about.php">About</a>
+<a href="contact.php">Contact</a>
+</body>
+</html>
+
+```
+
+```yml
+spring:
+  application:
+    name: myfirstwebapp
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
+```
+
+The prefix property is set to /WEB-INF/jsp/. This tells the view resolver that the JSP files are located in the /WEB-INF/jsp/ directory of the application.
+
+The suffix property is set to .jsp. This tells the view resolver that the files it should look for will have names ending with .jsp.
+
+So, for example, if a controller method returns a view name of home, the view resolver will look for a file named /WEB-INF/jsp/home.jsp to render as the view.
+
+his configuration is used to set the logging level for classes in the org.springframework.web package to DEBUG. The logging level controls the amount of detail provided in the application's log output.
+
+In the hierarchy of logging levels, DEBUG is one level below INFO, meaning it includes all INFO messages plus additional more detailed messages useful for debugging. The levels from least to most detailed are OFF, FATAL, ERROR, WARN, INFO, DEBUG, and TRACE.
+
+By setting the logging level to DEBUG for org.springframework.web, you're asking Spring Boot to output more detailed log messages for classes in this package, which can be helpful for troubleshooting issues related to Spring's web functionality.
+
+```xml
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+</dependency>
+```
+
+The tomcat-embed-jasper library is a part of Apache Tomcat, an open-source implementation of the Java Servlet, JavaServer Pages, Java Expression Language, and Java WebSocket technologies. This library provides the Jasper 2 JSP (JavaServer Pages) engine, which is used to compile JSPs into servlets. This dependency is typically included when you want to enable JSP support in an embedded Tomcat server.
+
+Note that this snippet does not include a version element, which is typically used to specify the version of the dependency that the project should use. If the version element is not included, Maven will use the latest version of the dependency that is available in the repositories it has access to.
+
 ## 010 Step 06 - Exercise - Creating LoginController and login view
 
 ## 011 Step 07 - Quick Overview - How does web work - Request and Response
