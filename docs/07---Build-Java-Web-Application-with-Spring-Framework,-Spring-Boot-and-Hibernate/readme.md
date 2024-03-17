@@ -370,8 +370,6 @@ The ${name} part is a placeholder that suggests this HTML is used as a template,
 
 ![alt text](image-9.png)
 
-## 014 Step 10 - Understanding DispatcherServlet, Model 1, Model 2 and Front Controller
-
 ```yml
 /**
  * This configuration sets the logging levels for different packages in the application.
@@ -425,6 +423,14 @@ public class LoginController {
 ```
 
 ![alt text](image-10.png)
+
+## 014 Step 10 - Understanding DispatcherServlet, Model 1, Model 2 and Front Controller
+
+![alt text](image-11.png)
+![alt text](image-12.png)
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
 
 ## 015 Step 11 - Creating a Login Form
 
