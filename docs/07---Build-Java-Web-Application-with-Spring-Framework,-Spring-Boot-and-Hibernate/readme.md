@@ -2,6 +2,13 @@
 
 ## 002 Step 00 - Introduction to Building Web App with Spring Boot
 
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+
 ## 003 Step 01 - Creating Spring Boot Web Application with Spring Initializr
 
 ## 004 Step 02 - Quick overview of Spring Boot Project
