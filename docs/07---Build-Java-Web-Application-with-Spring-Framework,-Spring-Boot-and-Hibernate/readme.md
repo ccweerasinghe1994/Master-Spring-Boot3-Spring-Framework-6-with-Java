@@ -320,9 +320,111 @@ public class LoginController {
 
 ## 012 Step 08 - Capturing QueryParams using RequestParam and First Look at Model
 
+```java
+package com.wchamara.myfirstwebapp.login;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class LoginController {
+
+    // http://localhost:8080/login?name=chamara
+    @RequestMapping("/login")
+    public String login(@RequestParam String name, ModelMap model) {
+        model.put("name", name);
+        return "login";
+    }
+}
+
+```
+
+The provided code is a Java class named LoginController, which is part of a Spring MVC web application. This class is located in the com.wchamara.myfirstwebapp.login package.
+
+The @Controller annotation at the top of the class declaration indicates that this class is a controller in the Spring MVC framework. Controllers are responsible for processing incoming web requests and returning responses.
+
+Inside the LoginController class, there's a method named login(). This method is annotated with @RequestMapping("/login"), which tells Spring MVC that this method should handle HTTP requests to the "/login" URL path.
+
+The login() method takes two parameters: a String named name and a ModelMap named model. The @RequestParam annotation on the name parameter tells Spring MVC to bind the value of the "name" request parameter to this method parameter. For example, if the request URL is "<http://localhost:8080/login?name=chamara>", the name parameter will be set to "chamara".
+
+The ModelMap parameter is used to pass attributes (data) to the view (the web page that is sent as the response). In this case, the name value is added to the ModelMap with the key "name".
+
+Finally, the login() method returns the string "login". In the context of a Spring MVC controller, the returned string is typically the name of the view that should be rendered. So, this method is indicating that the "login" view should be used to generate the response. The "login" view will have access to the ModelMap and can use the "name" attribute to customize the response.
+
+```jsp
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Well come to the login page ${name}</h1>
+</body>
+</html>
+```
+
+The ${name} part is a placeholder that suggests this HTML is used as a template, and the ${name} part will be replaced with a dynamic value when the page is rendered. This is a common practice in server-side rendering, where a server generates a custom HTML page for each request. The server would replace ${name} with the actual value before sending the response to the client.
+
 ## 013 Step 09 - Quick Overview - Importance of Logging with Spring Boot
 
+![alt text](image-9.png)
+
 ## 014 Step 10 - Understanding DispatcherServlet, Model 1, Model 2 and Front Controller
+
+```yml
+/**
+ * This configuration sets the logging levels for different packages in the application.
+ * 
+ * - The `com.wchamara.myfirstwebapp` package is set to `debug` level, which means that detailed debug logs will be generated for this package.
+ * - The `org.springframework.web` package is set to `info` level, which means that only informational logs will be generated for this package.
+ * 
+ * Adjusting the logging levels can help in debugging and monitoring the application's behavior.
+ */
+logging:
+    level:
+        com:
+            wchamara:
+                myfirstwebapp: debug
+        org:
+            springframework:
+                web: info
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.login;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class LoginController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    /**
+     * Handles the login request and returns the login view.
+     * 
+     * @param name  the name parameter from the request
+     * @param model the ModelMap object to hold the data for the view
+     * @return the name of the login view
+     */
+    @RequestMapping("/login")
+    public String login(@RequestParam String name, ModelMap model) {
+        logger.info("name: {}", name);
+        logger.warn("name: {}", name);
+        logger.debug("name: {}", name);
+        model.put("name", name);
+        return "login";
+    }
+}
+```
+
+![alt text](image-10.png)
 
 ## 015 Step 11 - Creating a Login Form
 

@@ -7,6 +7,9 @@ spring:
       suffix: .jsp
 logging:
   level:
+    com:
+      wchamara:
+        myfirstwebapp: debug
     org:
       springframework:
-        web: DEBUG
+        web: info
