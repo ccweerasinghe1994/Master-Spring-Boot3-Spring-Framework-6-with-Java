@@ -7,4 +7,7 @@
 - [04---Exploring-Spring-Framework-Advanced-Features](./docs/04---Exploring-Spring-Framework-Advanced-Features/readme.md)
 - [05---Getting-Started-with-Spring-Boot](./docs/05---Getting-Started-with-Spring-Boot/readme.md)
 - [06---Getting-Started-with-JPA-and-Hibernate-with-Spring-and-Spring-Boot](./docs/06---Getting-Started-with-JPA-and-Hibernate-with-Spring-and-Spring-Boot/readme.md)
+
+- [07---Build-Java-Web-Application-with-Spring-Framework,-Spring-Boot-and-Hibernate](./docs/07---Build-Java-Web-Application-with-Spring-Framework,-Spring-Boot-and-Hibernate/readme.md)
+
 - [25---APPENDIX---Introduction-to-Functional-Programming-with-Java](./docs/25---APPENDIX---Introduction-to-Functional-Programming-with-Java/readme.md)
