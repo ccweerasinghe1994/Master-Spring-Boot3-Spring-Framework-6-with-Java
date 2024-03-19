@@ -629,6 +629,95 @@ public class AuthenticationService {
 
 ## 018 Step 14 - Getting started with Todo Features - Creating Todo and TodoService
 
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+
+public class Todo {
+
+    private int id;
+    private String username;
+    private String description;
+
+    private LocalDate targetDate;
+
+    private boolean Done;
+
+    public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+        this.id = id;
+        this.username = username;
+        this.description = description;
+        this.targetDate = targetDate;
+        Done = done;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
+    }
+
+    public boolean isDone() {
+        return Done;
+    }
+
+    public void setDone(boolean done) {
+        Done = done;
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoService {
+    private static final List<Todo> todos = new ArrayList<>();
+
+    static {
+        todos.add(new Todo(1, "chamara", "Learn Spring MVC", LocalDate.now().plusYears(1), false));
+        todos.add(new Todo(2, "chamara", "Learn Spring", LocalDate.now().plusYears(2), false));
+        todos.add(new Todo(3, "chamara", "Learn to Dance", LocalDate.now().plusYears(3), false));
+    }
+
+    public List<Todo> retrieveTodos() {
+        return todos;
+    }
+}
+
+```
+
 ## 019 Step 15 - Creating first version of List Todos Page
 
 ## 020 Step 16 - Understanding Session vs Model vs Request - @SessionAttributes
