@@ -10,14 +10,14 @@ public class Todo {
 
     private LocalDate targetDate;
 
-    private boolean Done;
+    private boolean done;
 
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
         this.targetDate = targetDate;
-        Done = done;
+        this.done = done;
     }
 
     public int getId() {
@@ -53,10 +53,10 @@ public class Todo {
     }
 
     public boolean isDone() {
-        return Done;
+        return done;
     }
 
     public void setDone(boolean done) {
-        Done = done;
+        this.done = done;
     }
 }

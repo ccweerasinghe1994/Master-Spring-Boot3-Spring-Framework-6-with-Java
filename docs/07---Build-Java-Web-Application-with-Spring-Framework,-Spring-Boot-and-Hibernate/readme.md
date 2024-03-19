@@ -910,6 +910,57 @@ public class TodoController {
 
 ## 021 Step 17 - Adding JSTL to Spring Boot Project and Showing Todos in a Table
 
+![alt text](image-19.png)
+
+```xml
+<dependency>
+    <groupId>jakarta.servlet.jsp.jstl</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>glassfish-jstl</artifactId>
+</dependency>
+```
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+</head>
+<body>
+<h1>Well come ${name}</h1>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+        <th>target date</th>
+        <th>done</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${todos}" var="todo">
+        <tr>
+            <td>${todo.id}</td>
+            <td>${todo.username}</td>
+            <td>${todo.description}</td>
+            <td>${todo.targetDate}</td>
+            <td>${todo.done}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</body>
+</html>
+```
+
+![alt text](image-20.png)
+
 ## 023 Step 18 - Adding Bootstrap CSS framework to Spring Boot Project using webjars
 
 ## 024 Step 19 - Formatting JSP pages with Bootstrap CSS framework
