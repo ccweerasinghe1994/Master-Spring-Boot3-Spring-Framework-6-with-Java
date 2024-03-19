@@ -720,6 +720,72 @@ public class TodoService {
 
 ## 019 Step 15 - Creating first version of List Todos Page
 
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoService {
+    private static final List<Todo> todos = new ArrayList<>();
+
+    static {
+        todos.add(new Todo(1, "chamara", "Learn Spring MVC", LocalDate.now().plusYears(1), false));
+        todos.add(new Todo(2, "chamara", "Learn Spring", LocalDate.now().plusYears(2), false));
+        todos.add(new Todo(3, "chamara", "Learn to Dance", LocalDate.now().plusYears(3), false));
+    }
+
+    public List<Todo> retrieveTodos() {
+        return todos;
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Controller
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+
+    @RequestMapping(value = "/todos")
+    public String getAllTodos(ModelMap model) {
+
+        List<Todo> todos = todoService.retrieveTodos();
+
+        model.put("todos", todos);
+        return "todoList";
+    }
+}
+
+```
+
+```jsp
+<html>
+<head>
+    <title>To Dos</title>
+</head>
+<body>
+<h1>Well come</h1>
+
+<h3>your todos are ${todos}</h3>
+</body>
+</html>
+```
+
 ## 020 Step 16 - Understanding Session vs Model vs Request - @SessionAttributes
 
 ## 021 Step 17 - Adding JSTL to Spring Boot Project and Showing Todos in a Table
