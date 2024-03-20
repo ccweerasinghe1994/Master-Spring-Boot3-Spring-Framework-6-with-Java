@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
 </head>
 <body>
 <h1>Well come ${name}</h1>
@@ -28,6 +29,8 @@
         </tr>
     </c:forEach>
     </tbody>
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+    <script src="webjars/jquery/3.7.1/jquery.js"></script>
 </table>
 </body>
 </html>
