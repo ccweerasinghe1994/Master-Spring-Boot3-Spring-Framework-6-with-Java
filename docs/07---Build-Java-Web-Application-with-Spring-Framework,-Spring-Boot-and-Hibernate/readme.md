@@ -529,17 +529,577 @@ public String gotToWelcomePage(@RequestParam String name, @RequestParam String p
 
 ## 017 Step 13 - Add hard coded validation of userid and password
 
+```java
+package com.wchamara.myfirstwebapp.login;
+
+import com.wchamara.myfirstwebapp.authentication.AuthenticationService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class LoginController {
+
+    private AuthenticationService authenticateService;
+
+    public LoginController(AuthenticationService authenticateService) {
+        this.authenticateService = authenticateService;
+    }
+
+    /**
+     * Handles the "/login" request mapping.
+     *
+     * @return The name of the view to be rendered.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        // Return the name of the view to be rendered.
+        return "login";
+    }
+
+    /**
+     * Handles the "/login" POST request mapping.
+     *
+     * @param name     The name parameter from the request.
+     * @param password The password parameter from the request.
+     * @param model    The ModelMap object used to pass attributes to the view.
+     * @return The name of the view to be rendered.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String gotToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
+        // Add the name and password attributes to the model.
+        model.put("name", name);
+        boolean isValidUser = authenticateService.authenticateUser(name, password);
+        if (!isValidUser) {
+            model.put("errorMessage", "Invalid Credentials");
+            return "login";
+        }
+        // Return the name of the view to be rendered.
+        return "welcome";
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.authentication;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthenticationService {
+    public boolean authenticateUser(String name, String password) {
+        return name.equalsIgnoreCase("chamara") && password.equals("Sliit123!@#");
+    }
+}
+
+```
+
+```jsp
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Well come</h1>
+
+<h3>your name is ${name}</h3>
+</body>
+</html>
+```
+
+```jsp
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Well come to the login page </h1>
+<pre>${errorMessage}</pre>
+<form action="" method="post">
+    Name:<input type="text" name="name">
+    Password:<input type="password" name="password">
+    <input type="submit">
+</form>
+</body>
+</html>
+```
+
 ## 018 Step 14 - Getting started with Todo Features - Creating Todo and TodoService
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+
+public class Todo {
+
+    private int id;
+    private String username;
+    private String description;
+
+    private LocalDate targetDate;
+
+    private boolean Done;
+
+    public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+        this.id = id;
+        this.username = username;
+        this.description = description;
+        this.targetDate = targetDate;
+        Done = done;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
+    }
+
+    public boolean isDone() {
+        return Done;
+    }
+
+    public void setDone(boolean done) {
+        Done = done;
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoService {
+    private static final List<Todo> todos = new ArrayList<>();
+
+    static {
+        todos.add(new Todo(1, "chamara", "Learn Spring MVC", LocalDate.now().plusYears(1), false));
+        todos.add(new Todo(2, "chamara", "Learn Spring", LocalDate.now().plusYears(2), false));
+        todos.add(new Todo(3, "chamara", "Learn to Dance", LocalDate.now().plusYears(3), false));
+    }
+
+    public List<Todo> retrieveTodos() {
+        return todos;
+    }
+}
+
+```
 
 ## 019 Step 15 - Creating first version of List Todos Page
 
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoService {
+    private static final List<Todo> todos = new ArrayList<>();
+
+    static {
+        todos.add(new Todo(1, "chamara", "Learn Spring MVC", LocalDate.now().plusYears(1), false));
+        todos.add(new Todo(2, "chamara", "Learn Spring", LocalDate.now().plusYears(2), false));
+        todos.add(new Todo(3, "chamara", "Learn to Dance", LocalDate.now().plusYears(3), false));
+    }
+
+    public List<Todo> retrieveTodos() {
+        return todos;
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Controller
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+
+    @RequestMapping(value = "/todos")
+    public String getAllTodos(ModelMap model) {
+
+        List<Todo> todos = todoService.retrieveTodos();
+
+        model.put("todos", todos);
+        return "todoList";
+    }
+}
+
+```
+
+```jsp
+<html>
+<head>
+    <title>To Dos</title>
+</head>
+<body>
+<h1>Well come</h1>
+
+<h3>your todos are ${todos}</h3>
+</body>
+</html>
+```
+
 ## 020 Step 16 - Understanding Session vs Model vs Request - @SessionAttributes
+
+```jsp
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Well come</h1>
+
+<h3>your name is ${name}</h3>
+<div>
+    <a href="/todos">Manage My Todos</a>
+</div>
+</body>
+</html>
+```
+
+```jsp
+<html>
+<head>
+    <title>To Dos</title>
+</head>
+<body>
+<h1>Well come</h1>
+<h3>your name is ${name}</h3>
+<h3>your todos are ${todos}</h3>
+</body>
+</html>
+```
+
+```java
+
+package com.wchamara.myfirstwebapp.login;
+
+import com.wchamara.myfirstwebapp.authentication.AuthenticationService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+@Controller
+@SessionAttributes("name")
+public class LoginController {
+
+    private AuthenticationService authenticateService;
+
+    public LoginController(AuthenticationService authenticateService) {
+        this.authenticateService = authenticateService;
+    }
+
+    /**
+     * Handles the "/login" request mapping.
+     *
+     * @return The name of the view to be rendered.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        // Return the name of the view to be rendered.
+        return "login";
+    }
+
+    /**
+     * Handles the "/login" POST request mapping.
+     *
+     * @param name     The name parameter from the request.
+     * @param password The password parameter from the request.
+     * @param model    The ModelMap object used to pass attributes to the view.
+     * @return The name of the view to be rendered.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String gotToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
+        // Add the name and password attributes to the model.
+        model.put("name", name);
+        boolean isValidUser = authenticateService.authenticateUser(name, password);
+        if (!isValidUser) {
+            model.put("errorMessage", "Invalid Credentials");
+            return "login";
+        }
+        // Return the name of the view to be rendered.
+        return "welcome";
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.List;
+
+@Controller
+@SessionAttributes("name")
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+
+    @RequestMapping(value = "/todos")
+    public String getAllTodos(ModelMap model) {
+
+        List<Todo> todos = todoService.retrieveTodos();
+
+        model.put("todos", todos);
+        return "todoList";
+    }
+}
+
+```
+
+![alt text](image-18.png)
 
 ## 021 Step 17 - Adding JSTL to Spring Boot Project and Showing Todos in a Table
 
+![alt text](image-19.png)
+
+```xml
+<dependency>
+    <groupId>jakarta.servlet.jsp.jstl</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>glassfish-jstl</artifactId>
+</dependency>
+```
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+</head>
+<body>
+<h1>Well come ${name}</h1>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+        <th>target date</th>
+        <th>done</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${todos}" var="todo">
+        <tr>
+            <td>${todo.id}</td>
+            <td>${todo.username}</td>
+            <td>${todo.description}</td>
+            <td>${todo.targetDate}</td>
+            <td>${todo.done}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</body>
+</html>
+```
+
+![alt text](image-20.png)
+
 ## 023 Step 18 - Adding Bootstrap CSS framework to Spring Boot Project using webjars
 
+let's add bootstrap and jquery to our project using webjars.
+
+```xml
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap</artifactId>
+    <version>5.1.3</version>
+</dependency>
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>jquery</artifactId>
+    <version>3.7.1</version>
+</dependency>
+```
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<h1>Well come ${name}</h1>
+<hr>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+        <th>target date</th>
+        <th>done</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${todos}" var="todo">
+        <tr>
+            <td>${todo.id}</td>
+            <td>${todo.username}</td>
+            <td>${todo.description}</td>
+            <td>${todo.targetDate}</td>
+            <td>${todo.done}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+    <script src="webjars/jquery/3.7.1/jquery.js"></script>
+</table>
+</body>
+</html>
+```
+
 ## 024 Step 19 - Formatting JSP pages with Bootstrap CSS framework
+
+```jsp
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Login</h1>
+    <pre>${errorMessage}</pre>
+    <form action="" method="post">
+        Name:<input type="text" name="name">
+        Password:<input type="password" name="password">
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>
+```
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Your ToDos</h1>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>description</th>
+            <th>target date</th>
+            <th>done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${todos}" var="todo">
+            <tr>
+                <td>${todo.id}</td>
+                <td>${todo.username}</td>
+                <td>${todo.description}</td>
+                <td>${todo.targetDate}</td>
+                <td>${todo.done}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+        <script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+        <script src="webjars/jquery/3.7.1/jquery.js"></script>
+    </table>
+</div>
+</body>
+</html>
+
+```
+
+```jsp
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1>Well come ${name}</h1>
+    <hr>
+    <a href="/todos">Manage </a>My Todos
+
+</div>
+</body>
+</html>
+```
+
+![alt text](image-21.png)
 
 ## 025 Step 20 - Lets Add a New Todo - Create a new View
 

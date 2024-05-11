@@ -1,15 +1,22 @@
 package com.wchamara.myfirstwebapp.login;
 
+import com.wchamara.myfirstwebapp.authentication.AuthenticationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("name")
 public class LoginController {
 
-    // http://localhost:8080/login?name=chamara
+    private AuthenticationService authenticateService;
+
+    public LoginController(AuthenticationService authenticateService) {
+        this.authenticateService = authenticateService;
+    }
 
     /**
      * Handles the "/login" request mapping.
@@ -34,8 +41,11 @@ public class LoginController {
     public String gotToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
         // Add the name and password attributes to the model.
         model.put("name", name);
-        model.put("password", password);
-
+        boolean isValidUser = authenticateService.authenticateUser(name, password);
+        if (!isValidUser) {
+            model.put("errorMessage", "Invalid Credentials");
+            return "login";
+        }
         // Return the name of the view to be rendered.
         return "welcome";
     }
