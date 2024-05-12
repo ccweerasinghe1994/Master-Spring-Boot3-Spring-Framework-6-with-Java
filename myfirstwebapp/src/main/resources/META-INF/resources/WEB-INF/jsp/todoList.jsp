@@ -30,6 +30,7 @@
                 <td>${todo.done}</td>
                 <td>
                     <a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a>
+                    <a href="update-todo?id=${todo.id}" class="btn btn-warning">Update</a>
                 </td>
             </tr>
         </c:forEach>

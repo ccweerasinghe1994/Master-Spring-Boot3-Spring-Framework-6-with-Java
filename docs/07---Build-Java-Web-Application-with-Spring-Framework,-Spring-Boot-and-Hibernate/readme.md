@@ -1515,7 +1515,30 @@ controller class
 ```
 
 ## 030 Step 25 - Implementing Update Todo - 1 - Show Update Todo Page
+service class
+```java
+    public Todo retrieveById(int id) {
+        Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+        return todos.stream().filter(predicate).findFirst().orElse(null);
+    }
+```
+controller class
+```java
+    @RequestMapping(value = "/update-todo", method = RequestMethod.GET)
+    public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+        Todo todo = todoService.retrieveById(id);
+        model.addAttribute("todo", todo);
+        return "todo";
+    }
 
+```
+adding jsp file
+```jsp
+<td>
+    <a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a>
+    <a href="update-todo?id=${todo.id}" class="btn btn-warning">Update</a>
+</td>
+```
 ## 031 Step 26 - Implementing Update Todo - 1 - Save changes to Todo
 
 ## 033 Step 27 - Adding Target Date Field to Todo Page

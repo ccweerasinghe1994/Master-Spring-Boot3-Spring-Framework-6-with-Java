@@ -39,4 +39,9 @@ public class TodoService {
             }
         }
     }
+
+    public Todo retrieveById(int id) {
+        Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+        return todos.stream().filter(predicate).findFirst().orElse(null);
+    }
 }
