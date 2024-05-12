@@ -1357,7 +1357,7 @@ public class TodoController {
 
 
 ```
-
+![img_2.png](img_2.png)
 ## 029 Step 24 - Implementing Delete Todo Feature - New View
 
 ## 030 Step 25 - Implementing Update Todo - 1 - Show Update Todo Page
