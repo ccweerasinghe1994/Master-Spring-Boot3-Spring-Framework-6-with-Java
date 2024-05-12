@@ -1540,7 +1540,25 @@ adding jsp file
 </td>
 ```
 ## 031 Step 26 - Implementing Update Todo - 1 - Save changes to Todo
+![img_3.png](img_3.png)
 
+```java
+    public void updateTodo(Todo todo) {
+        deleteTodo(todo.getId());
+        addTodo(todo.getUsername(), todo.getDescription(), todo.getTargetDate(), todo.isDone());
+    }
+
+```
+```java
+    @RequestMapping(value = "/update-todo", method = RequestMethod.POST)
+    public String showUpdateTodoPage(ModelMap model, @Valid Todo todo, BindingResult result) {
+        if (result.hasErrors()) {
+            return "todo";
+        }
+        todoService.updateTodo(todo);
+        return "redirect:/todos";
+    }
+```
 ## 033 Step 27 - Adding Target Date Field to Todo Page
 
 ## 035 Step 28 - Adding a Navigation Bar and Implementing JSP Fragments

@@ -18,6 +18,7 @@
         <form:errors path="description" cssClass="text-danger"/>
         <form:input path="id" type="hidden"/>
         <form:input path="username" type="hidden"/>
+        <form:input path="targetDate" type="hidden"/>
         <form:input path="done" type="hidden"/>
         <br>
         <input type="submit" class="btn btn-success">

@@ -65,11 +65,11 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/update-todo", method = RequestMethod.POST)
-    public String showUpdateTodoPage(@RequestParam int id, ModelMap model, @Valid Todo todo, BindingResult result) {
+    public String showUpdateTodoPage(ModelMap model, @Valid Todo todo, BindingResult result) {
         if (result.hasErrors()) {
             return "todo";
         }
-        todoService.updateTodo(id, todo.getDescription(), todo.getTargetDate(), todo.isDone());
+        todoService.updateTodo(todo);
         return "redirect:/todos";
     }
 }

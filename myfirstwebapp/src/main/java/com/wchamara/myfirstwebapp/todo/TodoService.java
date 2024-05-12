@@ -30,14 +30,9 @@ public class TodoService {
         todos.removeIf(predicate);
     }
 
-    public void updateTodo(int id, String desc, LocalDate targetDate, boolean isDone) {
-        for (Todo todo : todos) {
-            if (todo.getId() == id) {
-                todo.setDescription(desc);
-                todo.setTargetDate(targetDate);
-                todo.setDone(isDone);
-            }
-        }
+    public void updateTodo(Todo todo) {
+        deleteTodo(todo.getId());
+        addTodo(todo.getUsername(), todo.getDescription(), todo.getTargetDate(), todo.isDone());
     }
 
     public Todo retrieveById(int id) {
