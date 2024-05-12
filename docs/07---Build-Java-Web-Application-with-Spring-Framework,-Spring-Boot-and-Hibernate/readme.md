@@ -1102,6 +1102,113 @@ let's add bootstrap and jquery to our project using webjars.
 ![alt text](image-21.png)
 
 ## 025 Step 20 - Lets Add a New Todo - Create a new View
+let's create a todo jsp file
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Enter Todo Details</h1>
+    <hr>
+
+
+    <form method="post">
+        Description:<input type="text" name="description">
+        <br>
+        <input type="submit" class="btn btn-success">
+    </form>
+</div>
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>
+
+```
+
+let's add the link to the new todo page in the welcome page
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Your ToDos</h1>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>description</th>
+            <th>target date</th>
+            <th>done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${todos}" var="todo">
+            <tr>
+                <td>${todo.id}</td>
+                <td>${todo.username}</td>
+                <td>${todo.description}</td>
+                <td>${todo.targetDate}</td>
+                <td>${todo.done}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <a href="add-todo" class="btn btn-success">Add Todo</a>
+</div>
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>
+```
+
+let's add the controller for the new todo page
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.List;
+
+@Controller
+@SessionAttributes("name")
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+    
+
+    @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
+    public String showTodo() {
+        return "todo";
+    }
+
+    @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+    public String addTodo() {
+        return "redirect:/todos";
+    }
+}
+```
 
 ## 026 Step 21 - Enhancing TodoService to add the todo
 

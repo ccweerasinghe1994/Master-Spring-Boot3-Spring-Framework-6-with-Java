@@ -1,6 +1,6 @@
 package com.wchamara.learnspringframworklatest.game;
 
-public class MarioGame implements GamingConsole {
+public class PacManGame implements GamingConsole {
 
     public void up() {
         System.out.println("Jump");

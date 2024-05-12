@@ -3,6 +3,7 @@ package com.wchamara.myfirstwebapp.todo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
@@ -24,5 +25,15 @@ public class TodoController {
 
         model.put("todos", todos);
         return "todoList";
+    }
+
+    @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
+    public String showTodo() {
+        return "todo";
+    }
+
+    @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+    public String addTodo() {
+        return "redirect:/todos";
     }
 }

@@ -1,7 +1,6 @@
 package com.wchamara.learnspringframworklatest.game;
 
-public class MarioGame implements GamingConsole {
-
+public class SuperContraGame implements GamingConsole {
     public void up() {
         System.out.println("Jump");
     }
@@ -17,5 +16,4 @@ public class MarioGame implements GamingConsole {
     public void right() {
         System.out.println("Go right");
     }
-
 }

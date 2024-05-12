@@ -1,9 +1,13 @@
 package com.wchamara.learnspringframworklatest.game;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class GamerRunner {
     GamingConsole game;
 
-    public GamerRunner(GamingConsole game) {
+    public GamerRunner(@Qualifier("pacManGame") GamingConsole game) {
         this.game = game;
     }
 
