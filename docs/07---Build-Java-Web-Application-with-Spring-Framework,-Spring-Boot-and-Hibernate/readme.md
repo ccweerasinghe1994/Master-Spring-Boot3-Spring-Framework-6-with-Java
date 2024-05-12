@@ -1359,6 +1359,97 @@ public class TodoController {
 ```
 ![img_2.png](img_2.png)
 ## 029 Step 24 - Implementing Delete Todo Feature - New View
+let's handle errors 
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Controller
+@SessionAttributes("name")
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+    
+    @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+    public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "todo";
+        }
+
+        String name = (String) model.get("name");
+        todoService.addTodo(name, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        return "redirect:/todos";
+    }
+}
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import jakarta.validation.constraints.Size;
+
+import java.time.LocalDate;
+
+public class Todo {
+
+    private int id;
+    private String username;
+    
+    @Size(min = 10, message = "Enter at least 10 characters.")
+    private String description;
+    
+}
+
+```
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Enter Todo Details</h1>
+    <hr>
+
+
+    <form:form method="post" modelAttribute="todo">
+        Description:<form:input type="text" path="description" required="true"/>
+        <br>
+        <form:errors path="description" cssClass="text-danger"/>
+        <form:input path="id" type="hidden"/>
+        <form:input path="username" type="hidden"/>
+        <form:input path="done" type="hidden"/>
+        <br>
+        <input type="submit" class="btn btn-success">
+    </form:form>
+</div>
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>
+
+```
 
 ## 030 Step 25 - Implementing Update Todo - 1 - Show Update Todo Page
 
