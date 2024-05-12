@@ -19,4 +19,8 @@ public class TodoService {
     public List<Todo> retrieveTodos() {
         return todos;
     }
+
+    public void addTodo(String name, String desc, LocalDate targetDate, boolean isDone) {
+        todos.add(new Todo(todos.size() + 1, name, desc, targetDate, isDone));
+    }
 }
