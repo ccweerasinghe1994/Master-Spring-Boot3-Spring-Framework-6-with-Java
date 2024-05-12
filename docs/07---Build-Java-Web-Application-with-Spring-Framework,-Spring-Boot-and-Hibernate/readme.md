@@ -1274,8 +1274,89 @@ public class TodoController {
 ![img.png](img.png)
 
 ## 027 Step 22 - Adding Validations using Spring Boot Starter Validation
-
+![img_1.png](img_1.png)
 ## 028 Step 23 - Using Command Beans to implement New Todo Page Validations
+let's add spring boot starter validation to our project
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
+let's bind the todo object to the form in the todo jsp file
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html>
+<head>
+    <title>To Dos</title>
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Enter Todo Details</h1>
+    <hr>
+
+
+    <form:form method="post" modelAttribute="todo">
+        Description:<form:input type="text" path="description" required="true"/>
+        <form:input path="id" type="hidden"/>
+        <form:input path="username" type="hidden"/>
+        <form:input path="done" type="hidden"/>
+        <br>
+        <input type="submit" class="btn btn-success">
+    </form:form>
+</div>
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>
+
+```
+
+```java
+package com.wchamara.myfirstwebapp.todo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Controller
+@SessionAttributes("name")
+public class TodoController {
+
+    private TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+    
+    @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
+    public String showTodo(ModelMap model) {
+        String username = (String) model.get("name");
+        model.put("todo", new Todo(0, username, "", LocalDate.now().plusYears(1), false));
+        return "todo";
+    }
+
+    @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+    public String addTodo(ModelMap model, Todo todo) {
+        String name = (String) model.get("name");
+        todoService.addTodo(name, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        return "redirect:/todos";
+    }
+}
+
+
+```
 
 ## 029 Step 24 - Implementing Delete Todo Feature - New View
 
