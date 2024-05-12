@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
@@ -46,6 +47,13 @@ public class TodoController {
 
         String name = (String) model.get("name");
         todoService.addTodo(name, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        return "redirect:/todos";
+    }
+
+
+    @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
+    public String addTodo(@RequestParam int id) {
+        todoService.deleteTodo(id);
         return "redirect:/todos";
     }
 }
